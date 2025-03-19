@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { icons } from "../../../public";
 import ScrollReveal from "../animations/ScrollReveal";
@@ -20,7 +19,7 @@ const Commitment = () => {
             At <strong>LEE Construction Group, Inc.</strong>, we don’t just
             build structures—we build trust and lasting relationships. Our
             experienced team delivers projects with precision, transparency, and
-            efficiency. Whether it's a complex industrial project or a
+            efficiency. Whether it&apos;s a complex industrial project or a
             government contract, we guarantee:
           </p>
         </ScrollReveal>
