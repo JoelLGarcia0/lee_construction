@@ -141,7 +141,7 @@ const AboutUs = () => {
               sector initiatives, we have built a reputation for delivering
               quality workmanship, value engineering, and seamless project
               execution—ensuring that every project meets and exceeds our
-              clients' expectations.
+              clients expectations.
             </p>
           </ScrollReveal>
         </div>

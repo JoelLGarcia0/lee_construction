@@ -16,13 +16,13 @@ const ServicesSection = () => {
         <SlideIn direction="left">
           <div className="flex flex-col md:flex-row gap-6 text-center md:text-left">
             <p className="text-lg md:w-1/2">
-              LEE Construction's highly trained team of professionals provides a
-              variety of construction services including Pre-Construction,
-              General Contracting, Construction Management, and Design-Build.
-              Supported by the latest technology, our staff offers innovative,
-              cost-saving solutions that streamline the construction process,
-              with ideas customized to the specific necessity and essentials
-              that a particular project requires.
+              LEE Construction&apos;s highly trained team of professionals
+              provides a variety of construction services including
+              Pre-Construction, General Contracting, Construction Management,
+              and Design-Build. Supported by the latest technology, our staff
+              offers innovative, cost-saving solutions that streamline the
+              construction process, with ideas customized to the specific
+              necessity and essentials that a particular project requires.
             </p>
             <p className="text-lg md:w-1/2">
               We provide full construction management services with the
@@ -107,8 +107,8 @@ const ServicesSection = () => {
                 <p className="text-lg mt-6">
                   Diverse expertise across the entire construction spectrum have
                   fortified our core competencies and greatly enhanced the
-                  company's general contracting capabilities. Additionally, we
-                  have developed and maintained successful relationships with
+                  company&apos;s general contracting capabilities. Additionally,
+                  we have developed and maintained successful relationships with
                   subcontractors, vendors and suppliers that provide for
                   efficiency, reliability, and delivery on both price and
                   performance.
@@ -173,16 +173,16 @@ const ServicesSection = () => {
                   one company taking sole responsibility for planning, design,
                   engineering and construction phases through a single contract
                   with the owner. This method allows for more organization
-                  because there's one single point of accountability. Because of
-                  this, the client has more say in the project.
+                  because there&apos;s one single point of accountability.
+                  Because of this, the client has more say in the project.
                 </p>
                 <p className="text-lg text-center md:text-left md:w-1/2">
-                  LEE Construction's Design-Build projects deliver a total
+                  LEE Construction&apos;s Design-Build projects deliver a total
                   design and construction solution. Leveraging in-house
-                  experience and expertise, LEE is able to focus on the client's
-                  operational, environmental and functional requirements to
-                  drive all design control, engineering, estimating,
-                  value-engineering, risk management, scheduling and
+                  experience and expertise, LEE is able to focus on the
+                  client&apos;s operational, environmental and functional
+                  requirements to drive all design control, engineering,
+                  estimating, value-engineering, risk management, scheduling and
                   construction. We believe that understanding our client&apos;s
                   needs makes all the difference. It&apos;s how we listen,
                   evaluate, and execute that distinguishes us from our

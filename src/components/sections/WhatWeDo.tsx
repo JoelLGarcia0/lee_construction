@@ -3,8 +3,7 @@
 import React from "react";
 import { images } from "../../../public";
 import Image from "next/image";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import SlideIn from "../animations/SlideIn";
 

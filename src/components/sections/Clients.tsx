@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import Image from "next/image";
 import { logos } from "../../../public";
 import Marquee from "react-fast-marquee";

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Lato, Oswald } from "next/font/google";
 import "../styles/globals.css";
 import NavBar from "@/components/layout/NavBar";
-import Hero from "@/components/sections/Hero";
 import Footer from "@/components/layout/Footer";
 
 const lato = Lato({

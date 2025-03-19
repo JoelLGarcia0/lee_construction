@@ -22,10 +22,11 @@ const Careers = () => {
               pride in building a team driven by collaboration, integrity, and
               innovation. With a strong focus on professional growth and career
               development, we provide employees with the resources and
-              opportunities needed to excel. If you're looking for a dynamic
-              work environment where your expertise is valued, your ideas are
-              heard, and your contributions make a real impact, we invite you to
-              join our team and help shape the future of construction.
+              opportunities needed to excel. If you&apos;re looking for a
+              dynamic work environment where your expertise is valued, your
+              ideas are heard, and your contributions make a real impact, we
+              invite you to join our team and help shape the future of
+              construction.
             </p>
           </SlideIn>
         </div>
