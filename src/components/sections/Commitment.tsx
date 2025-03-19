@@ -16,7 +16,7 @@ const Commitment = () => {
       <div className="mt-6 max-w-3xl mx-auto text-left">
         <ScrollReveal>
           <p className="text-gray-800 leading-relaxed">
-            At <strong>LEE Construction Group, Inc.</strong>, we don’t just
+            At <strong>LEE Construction Group, Inc.</strong>, we don&apos;t just
             build structures—we build trust and lasting relationships. Our
             experienced team delivers projects with precision, transparency, and
             efficiency. Whether it&apos;s a complex industrial project or a
