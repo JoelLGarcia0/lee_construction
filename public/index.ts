@@ -1,0 +1,48 @@
+export const icons = {
+  leelogoIco: "/icons/leelogo.ico",
+  leelogoPng: "/icons/leelogo.png",
+  leelogo2Png: "/icons/leelogo2.png",
+  ruler: "/icons/ruler.svg",
+  hardhat: "/icons/hardhat.svg",
+  screwdrivers: "/icons/screwdrivers.svg",
+  line1: "/icons/line1.svg",
+  line2: "/icons/line2.svg",
+};
+
+export const images = {
+  aboutTitlePic: "/images/abouttitlepic.jpeg",
+  blueprintBg: "/images/blueprintbg.jpeg",
+  careerPic: "/images/careerpic.jpg",
+  designBuildBg: "/images/designbuildbg.png",
+  gcPic: "/images/gcpic.webp",
+  governmentCardBg: "/images/governmentcardbg.jpeg",
+  hero: "/images/HeroResize.png",
+  memorial: "/images/memorial.jpg",
+  plansBg: "/images/plansbg.webp",
+  preConstructionBg: "/images/preconstructionbg.jpg",
+  projectsTitleBg: "/images/projectstitlebg.webp",
+  school: "/images/school.png",
+  servicePhoto: "/images/servicephoto.jpeg",
+  structural: "/images/structural.webp",
+  teamTitleBg: "/images/teamtitlebg.jpeg",
+  whatWeDoBg: "/images/whatwedobg.jpeg",
+  workplace: "/images/workplace.jpg",
+  project1: "/images/SouthMiamischool.jpg",
+  project2: "/images/JacksonMemorial.jpg",
+  project3: "/images/SavannahCourthouse2.jpg",
+  chart1: "/images/chart1.png",
+};
+export const logos = {
+  baptist: "/logos/baptist.png",
+  browardCounty: "/logos/browardcounty.png",
+  browardHealth: "/logos/browardhealth.png",
+  clevelandClinic: "/logos/clevelandclinic.png",
+  gsa: "/logos/gsa.png",
+  jackson: "/logos/jackson.png",
+  memorial: "/logos/memorial.png",
+  miamiDadeCounty: "/logos/miamidadecounty.png",
+  miamiDadeSchools: "/logos/miamidadeschools.png",
+  nationalParkServices: "/logos/nationalparkservices.png",
+};
+
+export default { icons, images, logos };
