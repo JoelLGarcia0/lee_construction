@@ -38,7 +38,7 @@ const ContactUs = () => {
           type: "error",
         });
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error sending message:", error);
       setStatus({
         message: "An error occurred. Please try again.",
