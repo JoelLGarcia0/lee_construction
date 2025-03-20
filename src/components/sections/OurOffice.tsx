@@ -19,9 +19,8 @@ const OurOffice = () => {
               </h1>
             </SlideIn>
             <div className="flex items-center gap-4 py-4">
-              <SlideIn direction="left">
-                <FaMapMarkerAlt className="text-blue text-5xl" />
-              </SlideIn>
+              <FaMapMarkerAlt className="text-blue text-5xl" />
+
               <div>
                 <SlideIn direction="left">
                   <h2 className="text-lg font-semibold">Miami Office</h2>
@@ -32,9 +31,8 @@ const OurOffice = () => {
             </div>
 
             <div className="flex items-center py-4 gap-4">
-              <SlideIn direction="left">
-                <FaPhoneAlt className="text-blue text-5xl" />
-              </SlideIn>
+              <FaPhoneAlt className="text-blue text-5xl" />
+
               <div>
                 <SlideIn direction="left">
                   <h2 className="text-lg font-semibold py-2">Contact</h2>
