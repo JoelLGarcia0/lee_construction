@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-[85vh] flex items-center justify-end">
+    <section className="relative w-full h-[85vh] flex items-center justify-center">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -26,8 +26,8 @@ const Hero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-4xl text-left px-12 mt-10 text-white">
-        <h1 className="text-4xl md:text-4xl font-bold uppercase mb-2  underline md:py-2">
+      <div className="relative z-10 max-w-4xl text-center px-12 mt-10 text-white">
+        <h1 className="text-4xl md:text-5xl font-bold uppercase mb-2  underline md:py-2">
           Commerical contractors
         </h1>
         <h1 className="text-xl md:text-2xl">

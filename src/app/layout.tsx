@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "LEE Construction Group | Commercial Contractors",
   description:
     "Providing high-quality construction services in healthcare, education, and government sectors.",
+  icons: {
+    icon: "/icons/leelogo.ico",
+  },
 };
 
 export default function RootLayout({
