@@ -20,9 +20,41 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   title: "LEE Construction Group | Commercial Contractors",
   description:
-    "Providing high-quality construction services in healthcare, education, and government sectors.",
+    "Experienced commercial contractors specializing in healthcare, education, federal, and municipal projects.",
   icons: {
     icon: "/icons/leelogo.ico",
+  },
+  metadataBase: new URL("https://lee-construction.vercel.app"),
+  keywords: [
+    "commercial construction",
+    "healthcare contractors",
+    "education construction",
+    "municipal construction",
+    "federal building contractors",
+  ],
+  openGraph: {
+    title: "LEE Construction Group | Commercial Contractors",
+    description:
+      "Specializing in high-quality construction projects for healthcare, education, federal, and municipal sectors.",
+    url: "https://lee-construction.vercel.app/",
+    siteName: "LEE Construction Group Inc",
+    images: [
+      {
+        url: "https://lee-construction.vercel.app/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Construction site with cranes and building structures",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LEE Construction Group | Commercial Contractors",
+    description:
+      "Providing professional construction services across healthcare, education, and government sectors.",
+    images: ["https://lee-construction.vercel.app/images/og-image.jpg"],
   },
 };
 
