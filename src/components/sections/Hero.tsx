@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-[85vh] flex items-center justify-center">
+    <section className="relative w-full h-[85vh] flex items-center justify-center ">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image

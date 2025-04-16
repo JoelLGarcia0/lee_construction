@@ -50,7 +50,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="py-16 px-8 w-full flex justify-center bg-white text-center scroll-mt-26 md:scroll-mt-[15vh]"
+      className="py-16 px-8 w-full flex justify-center bg-white text-center scroll-mt-26 md:scroll-mt-[15vh] overflow-hidden"
     >
       <div className="w-full max-w-lg">
         <h1 className="text-3xl font-bold text-darkblue pb-2">Contact Us</h1>
@@ -121,7 +121,7 @@ const ContactUs = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-darkblue transition-all"
+            className="w-full bg-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-darkblue transition-all cursor-pointer"
           >
             Send Message
           </button>

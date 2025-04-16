@@ -7,7 +7,7 @@ import ScrollReveal from "../animations/ScrollReveal";
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="w-full">
+    <section id="services" className="w-full overflow-hidden">
       {/* Introduction Section */}
       <div className="max-w-6xl mx-auto px-8 py-10">
         <h1 className="text-4xl text-darkblue mb-6 font-bold text-center">

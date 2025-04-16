@@ -8,7 +8,10 @@ import ScrollReveal from "../animations/ScrollReveal";
 
 const AboutUs = () => {
   return (
-    <section id="about" className="relative w-full py-10 bg-white">
+    <section
+      id="about"
+      className="overflow-hidden relative w-full py-10 bg-white"
+    >
       {/* Background Image - Blueprint Effect */}
       <div className="absolute inset-0 opacity-10">
         <Image

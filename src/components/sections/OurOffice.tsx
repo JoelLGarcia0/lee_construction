@@ -6,7 +6,7 @@ const OurOffice = () => {
   return (
     <section
       id="ouroffice"
-      className="py-12 w-full px-8 flex justify-center bg-greybg text-center"
+      className="py-12 w-full px-8 flex justify-center overflow-hidden bg-greybg text-center"
     >
       <div className="w-full max-w-5xl p-6">
         {/* Content Layout */}

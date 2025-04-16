@@ -6,7 +6,10 @@ import ScrollReveal from "../animations/ScrollReveal";
 
 const Commitment = () => {
   return (
-    <section id="ourcommitment" className="py-10 px-8 bg-greybg text-center">
+    <section
+      id="ourcommitment"
+      className="py-10 px-8 bg-greybg text-center overflow-hidden"
+    >
       {/* Title Section */}
 
       <h1 className="text-3xl font-bold text-darkblue">

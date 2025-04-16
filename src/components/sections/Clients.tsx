@@ -19,7 +19,7 @@ const clientLogos = [
 
 const Clients = () => {
   return (
-    <section className="py-16 px-8 bg-white text-center">
+    <section className="py-16 px-8 bg-white text-center overflow-hidden">
       <h1 className="text-3xl font-bold text-darkblue mb-8">Our Clients</h1>
 
       {/* Scrolling Logo Carousel */}

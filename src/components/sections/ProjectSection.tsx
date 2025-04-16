@@ -15,7 +15,7 @@ import SlideIn from "../animations/SlideIn";
 
 const ProjectSection = () => {
   return (
-    <section id="project" className="relative w-full py-16">
+    <section id="project" className="relative w-full py-16 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image

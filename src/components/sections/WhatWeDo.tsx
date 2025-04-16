@@ -9,7 +9,7 @@ import SlideIn from "../animations/SlideIn";
 
 const WhatWeDo = () => {
   return (
-    <section id="whatwedo" className="relative w-full py-16">
+    <section id="whatwedo" className="relative w-full py-16 overflow-hidden">
       <div className="absolute inset-0">
         <Image
           src={images.whatWeDoBg}

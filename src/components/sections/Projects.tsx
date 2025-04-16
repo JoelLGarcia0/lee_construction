@@ -26,7 +26,7 @@ const Projects = () => {
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-8 py-12 text-center">
+    <section className="max-w-5xl mx-auto px-8 py-12 text-center overflow-hidden">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8 text-darkblue">
         Our <span className="text-rust">Experience</span> At A Glance

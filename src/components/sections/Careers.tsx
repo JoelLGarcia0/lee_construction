@@ -7,7 +7,7 @@ import SlideIn from "../animations/SlideIn";
 
 const Careers = () => {
   return (
-    <section id="careers" className="w-full">
+    <section id="careers" className="w-full overflow-hidden">
       {/* Top Section - Careers Overview */}
       <div className="py-16 px-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Side - Text Content */}

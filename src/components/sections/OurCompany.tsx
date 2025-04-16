@@ -8,7 +8,7 @@ const OurCompany = () => {
   return (
     <section
       id="our-company"
-      className=" relative py-10 px-8 bg-white text-center scroll-mt-26 md:scroll-mt-[15vh]"
+      className=" relative py-10 px-8 overflow-hidden bg-white text-center scroll-mt-26 md:scroll-mt-[15vh]"
     >
       {/* Title Section */}
 
