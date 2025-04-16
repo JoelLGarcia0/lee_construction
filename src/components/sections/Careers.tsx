@@ -17,16 +17,14 @@ const Careers = () => {
           </h1>
           <SlideIn direction="left">
             <p className="text-gray-800 leading-relaxed">
-              LEE Construction Group, Inc. is an Equal Opportunity Employer
-              committed to fostering a diverse and inclusive workplace. We take
-              pride in building a team driven by collaboration, integrity, and
-              innovation. With a strong focus on professional growth and career
-              development, we provide employees with the resources and
-              opportunities needed to excel. If you&apos;re looking for a
-              dynamic work environment where your expertise is valued, your
-              ideas are heard, and your contributions make a real impact, we
-              invite you to join our team and help shape the future of
-              construction.
+              At LEE Construction Group, Inc. we take pride in building a team
+              driven by collaboration, integrity, and innovation. With a strong
+              focus on professional growth and career development, we provide
+              employees with the resources and opportunities needed to excel. If
+              you&apos;re looking for a dynamic work environment where your
+              expertise is valued, your ideas are heard, and your contributions
+              make a real impact, we invite you to join our team and help shape
+              the future of construction.
             </p>
           </SlideIn>
         </div>

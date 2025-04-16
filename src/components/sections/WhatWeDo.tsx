@@ -72,19 +72,19 @@ const WhatWeDo = () => {
             <Card className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
               {/* Background Image */}
               <Image
-                src={images.memorial}
+                src={images.baptist}
                 alt="Healthcare Construction"
                 fill
                 style={{
                   objectFit: "cover",
-                  objectPosition: "left",
+                  objectPosition: "center",
                 }}
                 className="rounded-md"
               />
               {/* Blue Overlay */}
               <div className="absolute inset-0 bg-darkblue/30"></div>
               {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-4">
+              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
                 Healthcare
               </div>
             </Card>
@@ -95,19 +95,19 @@ const WhatWeDo = () => {
             <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
               {/* Background Image */}
               <Image
-                src={images.school}
+                src={images.ftschool}
                 alt="Healthcare Construction"
                 fill
                 style={{
                   objectFit: "cover",
-                  objectPosition: "20% bottom",
+                  objectPosition: " 75% center",
                 }}
                 className="rounded-md"
               />
               {/* Blue Overlay */}
               <div className="absolute inset-0 bg-darkblue/30"></div>
               {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-4">
+              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
                 Education
               </div>
             </Card>
@@ -118,19 +118,19 @@ const WhatWeDo = () => {
             <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
               {/* Background Image */}
               <Image
-                src={images.governmentCardBg}
+                src={images.county}
                 alt="Healthcare Construction"
                 fill
                 style={{
                   objectFit: "cover",
-                  objectPosition: "center top",
+                  objectPosition: "center 20%",
                 }}
                 className="rounded-md"
               />
               {/* Blue Overlay */}
               <div className="absolute inset-0 bg-darkblue/30"></div>
               {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-4">
+              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
                 Government
               </div>
             </Card>

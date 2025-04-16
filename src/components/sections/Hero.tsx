@@ -46,7 +46,7 @@ const Hero = () => {
           transition={{ duration: 1.4, ease: "easeOut" }}
         >
           <a
-            href="tel:+1234567890"
+            href="tel:+3052167558"
             className="inline-flex items-center gap-2 uppercase bg-rust px-6 py-3 rounded-4xl text-white text-lg font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
           >
             <FaPhoneAlt className="text-white text-xl" />

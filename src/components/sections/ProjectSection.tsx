@@ -106,7 +106,7 @@ const ProjectSection = () => {
 
           <div className="w-20 h-1 bg-blue mt-4"></div>
           <SlideIn direction="right">
-            <p className="mt-4 text-lg">Our recently completed projects</p>
+            <p className="mt-4 text-lg">Some of our completed projects</p>
           </SlideIn>
 
           <SlideIn direction="right">

@@ -12,17 +12,14 @@ import ScrollReveal from "../animations/ScrollReveal";
 const Projects = () => {
   const [expanded, setExpanded] = useState(false);
 
-  // Array of project images (replace with actual image URLs)
+  // Array of project images
   const images = [
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
-    "/images/project1.png",
+    "/images/miamidadeschool.jpeg",
+    "/images/beachcityhall.jpeg",
+    "/images/hospitalenterance.jpeg",
+    "/images/insidehospital.jpeg",
+    "/images/MPCMiramar.jpeg",
+    "/images/dashimage.jpg",
   ];
 
   return (
@@ -68,7 +65,7 @@ const Projects = () => {
         {/* Animate Presence for the expanding images */}
         <AnimatePresence>
           {expanded &&
-            images.slice(3).map((src, index) => (
+            images.slice(3, 6).map((src, index) => (
               <motion.div
                 key={index + 3}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -83,7 +80,7 @@ const Projects = () => {
               >
                 <Image
                   src={src}
-                  alt={`Project ${index + 3}`}
+                  alt={`Project ${index + 4}`}
                   fill
                   className="object-cover"
                 />

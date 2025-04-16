@@ -43,7 +43,7 @@ const OurCompany = () => {
               <FiCheckCircle className="text-blue text-2xl" />
             </ScrollReveal>
             <ScrollReveal>
-              <span className="font-medium">Over 18 years of Experience</span>
+              <span className="font-medium">Over 19 years of Experience</span>
             </ScrollReveal>
           </div>
 
