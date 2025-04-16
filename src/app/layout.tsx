@@ -3,6 +3,7 @@ import { Lato, Oswald } from "next/font/google";
 import "../styles/globals.css";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import Head from "next/head";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -32,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <meta name="format-detection" content="telephone=no" />
+      </Head>
       <body className={`${lato.variable} ${oswald.variable} antialiased`}>
         <NavBar />
         {children}

@@ -28,7 +28,7 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="relative z-10 max-w-4xl text-center px-12 mt-10 text-white">
         <h1 className="text-4xl md:text-5xl font-bold uppercase mb-2  underline md:py-2">
-          Commerical contractors
+          Commercial contractors
         </h1>
         <h1 className="text-xl md:text-2xl">
           Specializing in Healthcare, Education, Federal, and Municipal
