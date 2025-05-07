@@ -7,7 +7,10 @@ const Footer = () => {
         {/* Footer Text */}
         <p className="text-white text-sm">
           © {new Date().getFullYear()} Lee Construction Inc. All Rights
-          Reserved.
+          Reserved. This website was created by{" "}
+          <a className="font-semibold" href="https://restweb.dev">
+            RESTWeb.dev
+          </a>
         </p>
       </div>
     </footer>
