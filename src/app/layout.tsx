@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import Head from "next/head";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -64,15 +65,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <meta name="format-detection" content="telephone=no" />
-      </Head>
-      <body className={`${lato.variable} ${oswald.variable} antialiased`}>
-        <NavBar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <Head>
+          <meta name="format-detection" content="telephone=no" />
+        </Head>
+        <body className={`${lato.variable} ${oswald.variable} antialiased`}>
+          <NavBar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   MdOutlineKeyboardDoubleArrowDown,
@@ -9,18 +9,32 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "../animations/ScrollReveal";
 
+interface ImageData {
+  id: string;
+  src: string;
+  alt: string;
+  order: number;
+}
+
 const Projects = () => {
   const [expanded, setExpanded] = useState(false);
+  const [images, setImages] = useState<ImageData[]>([]);
 
-  // Array of project images
-  const images = [
-    "/images/miamidadeschool.jpeg",
-    "/images/beachcityhall.jpeg",
-    "/images/hospitalenterance.jpeg",
-    "/images/insidehospital.jpeg",
-    "/images/MPCMiramar.jpeg",
-    "/images/dashimage.jpg",
-  ];
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await fetch("/api/admin/images");
+        const data = await res.json();
+        setImages(data.images || []);
+      } catch (err) {
+        console.error("Failed to load project images", err);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  const visible = expanded ? images : images.slice(0, 6);
 
   return (
     <section className="max-w-5xl mx-auto px-8 py-12 text-center overflow-hidden">
@@ -36,51 +50,31 @@ const Projects = () => {
           Construction Group, Inc. continues to serve major clients such as
           Jackson Health Systems, the National Park Service, GSA, and the U.S.
           Navy. Backed by a skilled team, we have the manpower and capability to
-          perform work throughout Florida and beyond. Our commitment to quality,
-          efficiency, and value engineering ensures that we deliver the best
-          results at competitive prices. From leadership to staff, our
-          collective construction expertise is indispensable, driving us to take
-          on new challenges and expand our reach while maintaining the highest
-          standards of customer satisfaction
+          perform work throughout Florida and beyond...
         </p>
       </ScrollReveal>
 
-      {/* Grid Container */}
+      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-        {/* Always visible images */}
-        {images.slice(0, 3).map((src, index) => (
-          <div
-            key={index}
-            className="relative w-full aspect-square bg-gray-600 rounded-lg overflow-hidden"
-          >
-            <Image
-              src={src}
-              alt={`Project ${index + 1}`}
-              fill
-              className="object-cover"
-            />
-          </div>
-        ))}
-
-        {/* Animate Presence for the expanding images */}
         <AnimatePresence>
-          {expanded &&
-            images.slice(3, 6).map((src, index) => (
+          {visible
+            .sort((a, b) => a.order - b.order)
+            .map((img, index) => (
               <motion.div
-                key={index + 3}
+                key={img.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{
                   duration: 0.5,
                   ease: "easeOut",
-                  delay: index * 0.1,
+                  delay: index * 0.05,
                 }}
                 className="relative w-full aspect-square bg-gray-600 rounded-lg overflow-hidden"
               >
                 <Image
-                  src={src}
-                  alt={`Project ${index + 4}`}
+                  src={img.src}
+                  alt={img.alt}
                   fill
                   className="object-cover"
                 />
@@ -90,18 +84,20 @@ const Projects = () => {
       </div>
 
       {/* Expand/Collapse Button */}
-      <div className="mt-6 flex justify-center">
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="flex justify-center items-center w-12 h-12 rounded-full border border-darkblue text-darkblue hover:bg-darkblue hover:text-white  cursor-pointer transition-all"
-        >
-          {expanded ? (
-            <MdOutlineKeyboardDoubleArrowUp size={24} />
-          ) : (
-            <MdOutlineKeyboardDoubleArrowDown size={24} />
-          )}
-        </button>
-      </div>
+      {images.length > 6 && (
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="flex justify-center items-center w-12 h-12 rounded-full border border-darkblue text-darkblue hover:bg-darkblue hover:text-white transition-all"
+          >
+            {expanded ? (
+              <MdOutlineKeyboardDoubleArrowUp size={24} />
+            ) : (
+              <MdOutlineKeyboardDoubleArrowDown size={24} />
+            )}
+          </button>
+        </div>
+      )}
     </section>
   );
 };
