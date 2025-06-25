@@ -14,15 +14,28 @@ export async function POST(req: Request) {
   const buffer = Buffer.from(arrayBuffer);
 
   try {
-    const uploadRes = await new Promise<any>((resolve, reject) => {
+    const uploadRes = await new Promise<{
+      secure_url: string;
+      original_filename: string;
+      public_id: string;
+    }>((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
           {
             folder: "lee-construction-projects",
           },
           (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
+            if (error) {
+              reject(error);
+            } else if (result) {
+              resolve({
+                secure_url: result.secure_url,
+                original_filename: result.original_filename,
+                public_id: result.public_id,
+              });
+            } else {
+              reject(new Error("No result returned from Cloudinary"));
+            }
           }
         )
         .end(buffer);
@@ -36,7 +49,7 @@ export async function POST(req: Request) {
       order: 0,
     };
 
-    const current = ((await redis.get("lee-images")) as any[]) || [];
+    const current = ((await redis.get("lee-images")) as ImageData[]) || [];
     image.order = current.length;
     const updated = [...current, image];
     await redis.set("lee-images", updated);

@@ -27,7 +27,7 @@ const AdminClient = () => {
       const res = await fetch("/api/admin/images");
       const data = await res.json();
       setImages(data.images || []);
-    } catch (err) {
+    } catch {
       setMessage("Error loading images");
     }
   };

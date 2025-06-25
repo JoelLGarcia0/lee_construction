@@ -2,12 +2,20 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import cloudinary from "@/lib/cloudinary";
 
+interface ImageData {
+  id: string;
+  src: string;
+  alt: string;
+  order: number;
+  publicId?: string;
+}
+
 export async function DELETE(
   _req: Request,
   context: { params: Promise<{ id: string }> }
 ) {
   const { id } = await context.params;
-  const current = (await redis.get("lee-images")) as any[];
+  const current = (await redis.get("lee-images")) as ImageData[];
 
   if (!current)
     return NextResponse.json({ error: "Not found" }, { status: 404 });
