@@ -13,16 +13,18 @@ export default function LoginPage() {
     if (isSignedIn) {
       router.push("/admin");
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, router]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <SignIn
-        routing="path"
-        path="/login"
-        signInUrl="/login"
-        forceRedirectUrl="/admin"
-      />
+    <div className="flex justify-center pt-24 pb-12 min-h-screen">
+      <div className="w-full max-w-md">
+        <SignIn
+          routing="path"
+          path="/login"
+          signInUrl="/login"
+          forceRedirectUrl="/admin"
+        />
+      </div>
     </div>
   );
 }

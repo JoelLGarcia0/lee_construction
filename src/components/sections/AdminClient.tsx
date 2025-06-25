@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SignOutButton } from "@clerk/nextjs";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface ImageData {
   id: string;
@@ -173,7 +174,7 @@ const AdminClient = () => {
                 key={img.id}
                 className="border rounded-lg overflow-hidden bg-white shadow"
               >
-                <img
+                <Image
                   src={img.src}
                   alt={img.alt}
                   className="w-full h-48 object-cover"
