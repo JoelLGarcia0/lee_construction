@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { FiCheckCircle } from "react-icons/fi";
-import ScrollReveal from "../animations/ScrollReveal";
 
 const OurCompany = () => {
   return (

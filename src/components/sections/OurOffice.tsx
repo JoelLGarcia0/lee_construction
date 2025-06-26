@@ -1,6 +1,5 @@
 import React from "react";
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
-import SlideIn from "../animations/SlideIn";
 
 const OurOffice = () => {
   return (

@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { images } from "../../../public";
-import SlideIn from "../animations/SlideIn";
-import ScrollReveal from "../animations/ScrollReveal";
 
 const ServicesSection = () => {
   return (

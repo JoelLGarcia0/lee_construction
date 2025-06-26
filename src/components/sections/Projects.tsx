@@ -7,7 +7,6 @@ import {
   MdOutlineKeyboardDoubleArrowUp,
 } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollReveal from "../animations/ScrollReveal";
 
 interface ImageData {
   id: string;

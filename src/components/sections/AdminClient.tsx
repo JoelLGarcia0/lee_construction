@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { SignOutButton } from "@clerk/nextjs";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { toast } from "sonner";
 

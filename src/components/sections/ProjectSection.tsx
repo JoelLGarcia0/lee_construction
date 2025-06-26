@@ -11,7 +11,6 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import { motion } from "framer-motion";
-import SlideIn from "../animations/SlideIn";
 
 const ProjectSection = () => {
   return (

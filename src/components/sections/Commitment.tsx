@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { icons } from "../../../public";
-import ScrollReveal from "../animations/ScrollReveal";
 
 const Commitment = () => {
   return (

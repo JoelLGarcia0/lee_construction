@@ -5,7 +5,6 @@ import { images } from "../../../public";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import SlideIn from "../animations/SlideIn";
 
 const WhatWeDo = () => {
   return (

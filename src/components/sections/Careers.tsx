@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { images } from "../../../public";
 import { FiPhoneCall } from "react-icons/fi";
-import SlideIn from "../animations/SlideIn";
 
 const Careers = () => {
   return (

@@ -3,9 +3,6 @@
 import Image from "next/image";
 import { icons, images } from "../../../public";
 import { TbArrowNarrowDownDashed } from "react-icons/tb";
-import SlideIn from "../animations/SlideIn";
-import ScrollReveal from "../animations/ScrollReveal";
-
 const AboutUs = () => {
   return (
     <section
