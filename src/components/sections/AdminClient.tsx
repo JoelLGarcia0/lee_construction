@@ -5,6 +5,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { toast } from "sonner";
 
 interface ImageData {
   id: string;
@@ -17,7 +18,6 @@ interface ImageData {
 const AdminClient = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     fetchImages();
@@ -29,7 +29,7 @@ const AdminClient = () => {
       const data = await res.json();
       setImages(data.images || []);
     } catch {
-      setMessage("Error loading images");
+      toast.error("Error loading images");
     }
   };
 
@@ -38,7 +38,6 @@ const AdminClient = () => {
     if (!files || files.length === 0) return;
 
     setLoading(true);
-    setMessage("Uploading...");
 
     try {
       const uploadedImages: ImageData[] = [];
@@ -59,13 +58,12 @@ const AdminClient = () => {
       }
 
       setImages((prev) => [...prev, ...uploadedImages]);
-      setMessage("Upload complete!");
+      toast.success("Upload complete!");
     } catch (err) {
       console.error(err);
-      setMessage("Upload failed");
+      toast.error("Upload failed");
     } finally {
       setLoading(false);
-      setTimeout(() => setMessage(""), 2000);
     }
   };
 
@@ -75,21 +73,25 @@ const AdminClient = () => {
     });
     if (res.ok) {
       setImages((prev) => prev.filter((img) => img.id !== id));
-      setMessage("Deleted image");
-      setTimeout(() => setMessage(""), 2000);
+      toast.success("Image deleted");
     }
   };
 
   const handleSaveOrder = async () => {
-    await fetch("/api/admin/images", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ images }),
-    });
-    setMessage("Order saved");
-    setTimeout(() => setMessage(""), 2000);
+    toast.promise(
+      fetch("/api/admin/images", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ images }),
+      }),
+      {
+        loading: "Saving...",
+        success: "Order saved!",
+        error: "Failed to save order.",
+      }
+    );
   };
 
   const moveImage = (from: number, to: number) => {
@@ -98,6 +100,11 @@ const AdminClient = () => {
     updated.splice(to, 0, moved);
     updated.forEach((img, i) => (img.order = i));
     setImages(updated);
+
+    // Prevent scroll caused by focus on button
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -132,16 +139,6 @@ const AdminClient = () => {
           </SignOutButton>
         </div>
 
-        {message && (
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="p-3 text-center bg-blue-100 text-blue-800 rounded"
-          >
-            {message}
-          </motion.div>
-        )}
-
         <div
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
@@ -174,11 +171,15 @@ const AdminClient = () => {
                 key={img.id}
                 className="border rounded-lg overflow-hidden bg-white shadow"
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative aspect-square">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
                 <div className="p-3 text-sm space-y-1">
                   <p className="font-medium">{img.alt}</p>
                   <p className="text-xs text-gray-400 truncate">

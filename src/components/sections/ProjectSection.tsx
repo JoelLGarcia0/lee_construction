@@ -105,31 +105,28 @@ const ProjectSection = () => {
           <h1 className="text-3xl font-bold">Projects</h1>
 
           <div className="w-20 h-1 bg-blue mt-4"></div>
-          <SlideIn direction="right">
-            <p className="mt-4 text-lg">Some of our completed projects</p>
-          </SlideIn>
 
-          <SlideIn direction="right">
-            <motion.a
-              href="/projects"
-              className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
+          <p className="mt-4 text-lg">Some of our completed projects</p>
+
+          <motion.a
+            href="/projects"
+            className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            See More
+            <motion.span
+              className="ml-2"
+              animate={{ x: [0, 5, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.2,
+                ease: "easeInOut",
+              }}
             >
-              See More
-              <motion.span
-                className="ml-2"
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1.2,
-                  ease: "easeInOut",
-                }}
-              >
-                →
-              </motion.span>
-            </motion.a>
-          </SlideIn>
+              →
+            </motion.span>
+          </motion.a>
         </div>
       </div>
     </section>

@@ -13,20 +13,17 @@ const OurOffice = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
           {/* Left: Office Info */}
           <div className="w-full md:w-1/2 flex flex-col items-start space-y-4 text-left text-darkblue">
-            <SlideIn direction="left">
-              <h1 className="text-3xl font-bold text-darkblue text-center mb-6">
-                Our Office
-              </h1>
-            </SlideIn>
+            <h1 className="text-3xl font-bold text-darkblue text-center mb-6">
+              Our Office
+            </h1>
+
             <div className="flex items-center gap-4 py-4">
               <FaMapMarkerAlt className="text-blue text-5xl" />
 
               <div>
-                <SlideIn direction="left">
-                  <h2 className="text-lg font-semibold">Miami Office</h2>
-                  <p className="text-gray-800 py-2">9771 South Dixie Hwy</p>
-                  <p className="text-gray-800 py-2">Miami, Florida 33156</p>
-                </SlideIn>
+                <h2 className="text-lg font-semibold">Miami Office</h2>
+                <p className="text-gray-800 py-2">9771 South Dixie Hwy</p>
+                <p className="text-gray-800 py-2">Miami, Florida 33156</p>
               </div>
             </div>
 
@@ -34,12 +31,9 @@ const OurOffice = () => {
               <FaPhoneAlt className="text-blue text-5xl" />
 
               <div>
-                <SlideIn direction="left">
-                  <h2 className="text-lg font-semibold py-2">Contact</h2>
-                </SlideIn>
-                <SlideIn direction="left">
-                  <p className="text-gray-700">(305) 216-7558</p>
-                </SlideIn>
+                <h2 className="text-lg font-semibold py-2">Contact</h2>
+
+                <p className="text-gray-700">(305) 216-7558</p>
               </div>
             </div>
           </div>

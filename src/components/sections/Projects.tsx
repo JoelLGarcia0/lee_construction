@@ -44,15 +44,14 @@ const Projects = () => {
       </h1>
 
       {/* Paragraph */}
-      <ScrollReveal>
-        <p className="mt-4 text-lg text-gray-700">
-          With 18 years of experience and a promising future ahead, LEE
-          Construction Group, Inc. continues to serve major clients such as
-          Jackson Health Systems, the National Park Service, GSA, and the U.S.
-          Navy. Backed by a skilled team, we have the manpower and capability to
-          perform work throughout Florida and beyond...
-        </p>
-      </ScrollReveal>
+
+      <p className="mt-4 text-lg text-gray-700">
+        With 18 years of experience and a promising future ahead, LEE
+        Construction Group, Inc. continues to serve major clients such as
+        Jackson Health Systems, the National Park Service, GSA, and the U.S.
+        Navy. Backed by a skilled team, we have the manpower and capability to
+        perform work throughout Florida and beyond...
+      </p>
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">

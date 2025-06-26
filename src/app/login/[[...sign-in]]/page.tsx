@@ -17,14 +17,12 @@ export default function LoginPage() {
 
   return (
     <div className="flex justify-center pt-24 pb-12 min-h-screen">
-      <div className="w-full max-w-md">
-        <SignIn
-          routing="path"
-          path="/login"
-          signInUrl="/login"
-          forceRedirectUrl="/admin"
-        />
-      </div>
+      <SignIn
+        routing="path"
+        path="/login"
+        signInUrl="/login"
+        forceRedirectUrl="/admin"
+      />
     </div>
   );
 }

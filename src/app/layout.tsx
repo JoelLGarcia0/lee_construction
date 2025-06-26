@@ -5,6 +5,7 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import Head from "next/head";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -73,6 +74,7 @@ export default function RootLayout({
         <body className={`${lato.variable} ${oswald.variable} antialiased`}>
           <NavBar />
           {children}
+          <Toaster position="bottom-right" />
           <Footer />
         </body>
       </html>

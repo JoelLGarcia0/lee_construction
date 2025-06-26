@@ -33,108 +33,103 @@ const WhatWeDo = () => {
           <h1 className="text-3xl font-bold text-center"> What We Do</h1>
 
           <div className="w-20 h-1 bg-blue mt-4 mx-auto "></div>
-          <SlideIn direction="left">
-            <p className="mt-4 text-lg">
-              We specialize in commercial construction with a strong focus on
-              healthcare, educational, federal, and local municipality projects.
-              Our expertise ensures high-quality, code-compliant facilities that
-              serve communities efficiently.
-            </p>
-          </SlideIn>
-          <SlideIn direction="left">
-            <motion.a
-              href="/services"
-              className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
+
+          <p className="mt-4 text-lg">
+            We specialize in commercial construction with a strong focus on
+            healthcare, educational, federal, and local municipality projects.
+            Our expertise ensures high-quality, code-compliant facilities that
+            serve communities efficiently.
+          </p>
+
+          <motion.a
+            href="/services"
+            className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            Our Services
+            <motion.span
+              className="ml-2"
+              animate={{ x: [0, 5, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.2,
+                ease: "easeInOut",
+              }}
             >
-              Our Services
-              <motion.span
-                className="ml-2"
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1.2,
-                  ease: "easeInOut",
-                }}
-              >
-                →
-              </motion.span>
-            </motion.a>
-          </SlideIn>
+              →
+            </motion.span>
+          </motion.a>
         </div>
 
         {/* Card Container */}
 
         <div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <SlideIn direction="right">
-            <Card className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
-              {/* Background Image */}
-              <Image
-                src={images.baptist}
-                alt="Healthcare Construction"
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-                className="rounded-md"
-              />
-              {/* Blue Overlay */}
-              <div className="absolute inset-0 bg-darkblue/30"></div>
-              {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-                Healthcare
-              </div>
-            </Card>
-          </SlideIn>
+
+          <Card className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+            {/* Background Image */}
+            <Image
+              src={images.baptist}
+              alt="Healthcare Construction"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+              className="rounded-md"
+            />
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-darkblue/30"></div>
+            {/* Title */}
+            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
+              Healthcare
+            </div>
+          </Card>
 
           {/* Card 2 */}
-          <SlideIn direction="right">
-            <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
-              {/* Background Image */}
-              <Image
-                src={images.ftschool}
-                alt="Healthcare Construction"
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: " 75% center",
-                }}
-                className="rounded-md"
-              />
-              {/* Blue Overlay */}
-              <div className="absolute inset-0 bg-darkblue/30"></div>
-              {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-                Education
-              </div>
-            </Card>
-          </SlideIn>
+
+          <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+            {/* Background Image */}
+            <Image
+              src={images.ftschool}
+              alt="Healthcare Construction"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: " 75% center",
+              }}
+              className="rounded-md"
+            />
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-darkblue/30"></div>
+            {/* Title */}
+            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
+              Education
+            </div>
+          </Card>
 
           {/* Card 3 */}
-          <SlideIn direction="right">
-            <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
-              {/* Background Image */}
-              <Image
-                src={images.county}
-                alt="Healthcare Construction"
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
-                }}
-                className="rounded-md"
-              />
-              {/* Blue Overlay */}
-              <div className="absolute inset-0 bg-darkblue/30"></div>
-              {/* Title */}
-              <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-                Government
-              </div>
-            </Card>
-          </SlideIn>
+
+          <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+            {/* Background Image */}
+            <Image
+              src={images.county}
+              alt="Healthcare Construction"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center 20%",
+              }}
+              className="rounded-md"
+            />
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-darkblue/30"></div>
+            {/* Title */}
+            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
+              Government
+            </div>
+          </Card>
         </div>
       </div>
     </section>

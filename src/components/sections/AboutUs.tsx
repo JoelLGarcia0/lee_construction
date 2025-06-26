@@ -36,15 +36,13 @@ const AboutUs = () => {
         <div className="mt-10 flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
           {/* Top Left: Content */}
           <div className="text-left space-y-4">
-            <SlideIn direction="left">
-              <p className="text-gray-800 leading-relaxed">
-                Founded in 2006, LEE Construction Group, Inc. began as a
-                licensed general contractor and construction management firm in
-                Miami, Florida. From the start, our mission has been to provide
-                high-quality commercial and industrial construction services,
-                delivering projects with precision, efficiency, and trust.
-              </p>
-            </SlideIn>
+            <p className="text-gray-800 leading-relaxed">
+              Founded in 2006, LEE Construction Group, Inc. began as a licensed
+              general contractor and construction management firm in Miami,
+              Florida. From the start, our mission has been to provide
+              high-quality commercial and industrial construction services,
+              delivering projects with precision, efficiency, and trust.
+            </p>
           </div>
 
           {/* Top Right: Dashed Line (Hidden on Small Screens) */}
@@ -78,14 +76,12 @@ const AboutUs = () => {
 
           {/* Middle Right: Content */}
           <div className="text-left space-y-4">
-            <SlideIn direction="right">
-              <p className="text-gray-800 leading-relaxed">
-                Over the years, our expertise has expanded to include
-                healthcare, education, federal, and municipal projects, allowing
-                us to successfully manage increasingly complex developments
-                across both the private and government sectors.
-              </p>
-            </SlideIn>
+            <p className="text-gray-800 leading-relaxed">
+              Over the years, our expertise has expanded to include healthcare,
+              education, federal, and municipal projects, allowing us to
+              successfully manage increasingly complex developments across both
+              the private and government sectors.
+            </p>
           </div>
 
           {/* Arrow for Small Screens */}
@@ -95,16 +91,14 @@ const AboutUs = () => {
 
           {/* Bottom Left: Content */}
           <div className="text-left space-y-4">
-            <SlideIn direction="left">
-              <p className="text-gray-800 leading-relaxed">
-                As we grew, our unwavering dedication to excellence and
-                innovation earned us industry-leading certifications,
-                solidifying our reputation as a trusted partner in the
-                construction sector. These credentials reflect our commitment to
-                upholding the highest standards of quality, safety, and
-                efficiency in every project we undertake.
-              </p>
-            </SlideIn>
+            <p className="text-gray-800 leading-relaxed">
+              As we grew, our unwavering dedication to excellence and innovation
+              earned us industry-leading certifications, solidifying our
+              reputation as a trusted partner in the construction sector. These
+              credentials reflect our commitment to upholding the highest
+              standards of quality, safety, and efficiency in every project we
+              undertake.
+            </p>
           </div>
 
           {/* Bottom Right: Dashed Line (Hidden on Small Screens) */}
@@ -127,26 +121,24 @@ const AboutUs = () => {
 
         {/* Bottom Section - Bonding Capacity */}
         <div className="mt-12 text-left">
-          <ScrollReveal>
-            <p className="text-gray-800 leading-relaxed">
-              With a bonding capacity of $100 million Aggregate and $50 million
-              per Single Project, we continue to expand our portfolio,
-              successfully completing projects for major clients, including
-              government agencies, healthcare facilities, and large-scale
-              infrastructure developments.
-            </p>
-            <p className="text-gray-800 leading-relaxed mt-4">
-              At LEE Construction Group, we take pride in our deep industry
-              knowledge, supported by a team of professionals ranging from
-              former general contractors to retired government officials with
-              extensive experience in government contracting and private sector
-              projects. From design-build projects to complex public and private
-              sector initiatives, we have built a reputation for delivering
-              quality workmanship, value engineering, and seamless project
-              execution—ensuring that every project meets and exceeds our
-              clients expectations.
-            </p>
-          </ScrollReveal>
+          <p className="text-gray-800 leading-relaxed">
+            With a bonding capacity of $100 million Aggregate and $50 million
+            per Single Project, we continue to expand our portfolio,
+            successfully completing projects for major clients, including
+            government agencies, healthcare facilities, and large-scale
+            infrastructure developments.
+          </p>
+          <p className="text-gray-800 leading-relaxed mt-4">
+            At LEE Construction Group, we take pride in our deep industry
+            knowledge, supported by a team of professionals ranging from former
+            general contractors to retired government officials with extensive
+            experience in government contracting and private sector projects.
+            From design-build projects to complex public and private sector
+            initiatives, we have built a reputation for delivering quality
+            workmanship, value engineering, and seamless project
+            execution—ensuring that every project meets and exceeds our clients
+            expectations.
+          </p>
         </div>
       </div>
     </section>
