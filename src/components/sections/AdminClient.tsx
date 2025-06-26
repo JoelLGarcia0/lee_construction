@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useAuth } from "@clerk/nextjs";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -125,17 +125,25 @@ const AdminClient = () => {
 
     handleUpload(fakeEvent);
   };
+  const { signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out successfully");
+  };
 
   return (
     <div className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Admin Panel</h1>
-          <SignOutButton>
-            <button className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded-lg">
-              Sign Out
-            </button>
-          </SignOutButton>
+
+          <button
+            onClick={handleSignOut}
+            className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded-lg cursor-pointer"
+          >
+            Sign Out
+          </button>
         </div>
 
         <div
