@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SignOutButton, useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
