@@ -196,7 +196,7 @@ const NavBar = () => {
                   <Button
                     asChild
                     onClick={handleContactClick}
-                    className="text-sm px-4 py-2 bg-blue text-white font-bold rounded-lg hover:bg-darkblue"
+                    className="text-sm px-4 py-2 bg-blue text-white font-bold rounded hover:bg-darkblue"
                   >
                     <Link href="#contact" onClick={() => setShowMenu(false)}>
                       Contact Us

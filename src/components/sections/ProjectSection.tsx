@@ -39,10 +39,10 @@ const ProjectSection = () => {
       >
         {/* Carousel Container */}
         <div className="w-full md:w-5/6 px-10">
-          <Carousel>
+          <Carousel className="rounded-lg">
             <CarouselContent>
               <CarouselItem>
-                <div className="flex justify-center items-center h-80 bg-gray-200 rounded-2xl relative">
+                <div className="flex justify-center items-center h-80 bg-gray-200 rounded relative">
                   <Image
                     src={images.project1}
                     alt="Project 1"
@@ -51,15 +51,15 @@ const ProjectSection = () => {
                       objectFit: "cover",
                       objectPosition: "center",
                     }}
-                    className="rounded-lg"
+                    className="rounded"
                   />
-                  <div className="absolute bottom-0  bg-blue rounded-md left-0 p-2 text-white">
+                  <div className="absolute bottom-0  bg-blue rounded left-0 p-2 text-white">
                     <h3 className="text-xl">South Miami Middle School</h3>
                   </div>
                 </div>
               </CarouselItem>
               <CarouselItem>
-                <div className="flex justify-center items-center h-80 bg-gray-200 rounded-2xl relative">
+                <div className="flex justify-center items-center h-80 bg-gray-200 rounded relative">
                   <Image
                     src={images.project2}
                     alt="Project 1"
@@ -68,15 +68,15 @@ const ProjectSection = () => {
                       objectFit: "cover",
                       objectPosition: "center",
                     }}
-                    className="rounded-lg"
+                    className="rounded"
                   />
-                  <div className="absolute bottom-0 bg-blue rounded-md left-0 p-2 text-white">
+                  <div className="absolute bottom-0 bg-blue rounded left-0 p-2 text-white">
                     <h3 className="text-xl">Jackson Memorial Renovation </h3>
                   </div>
                 </div>
               </CarouselItem>
               <CarouselItem>
-                <div className="flex justify-center items-center h-80 bg-gray-200 rounded-2xl relative">
+                <div className="flex justify-center items-center h-80 bg-gray-200 rounded relative">
                   <Image
                     src={images.project3}
                     alt="Project 1"
@@ -85,9 +85,9 @@ const ProjectSection = () => {
                       objectFit: "cover",
                       objectPosition: "center",
                     }}
-                    className="rounded-lg"
+                    className="rounded"
                   />
-                  <div className="absolute bottom-0 bg-blue rounded-md left-0 p-2 text-white">
+                  <div className="absolute bottom-0 bg-blue rounded left-0 p-2 text-white">
                     <h3 className="text-xl">Tomochichi Courthouse</h3>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ const ProjectSection = () => {
 
           <motion.a
             href="/projects"
-            className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded-sm text-md font-bold transition-all"
+            className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded text-md font-bold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
           >

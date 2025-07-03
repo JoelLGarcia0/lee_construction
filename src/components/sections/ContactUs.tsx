@@ -70,7 +70,7 @@ const ContactUs = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue"
+              className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue"
             />
           </div>
 
@@ -85,7 +85,7 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue"
+              className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue"
             />
           </div>
 
@@ -99,7 +99,7 @@ const ContactUs = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue"
+              className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue"
             />
           </div>
 
@@ -114,14 +114,14 @@ const ContactUs = () => {
               onChange={handleChange}
               rows={4}
               required
-              className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue"
+              className="w-full px-4 py-2 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-blue"
             ></textarea>
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue text-white font-semibold py-2 px-4 rounded-sm hover:bg-darkblue transition-all cursor-pointer"
+            className="w-full bg-blue text-white font-semibold py-2 px-4 rounded hover:bg-darkblue transition-all cursor-pointer"
           >
             Send Message
           </button>

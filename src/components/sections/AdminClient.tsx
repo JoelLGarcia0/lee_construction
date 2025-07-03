@@ -140,7 +140,7 @@ const AdminClient = () => {
 
           <button
             onClick={handleSignOut}
-            className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded-lg cursor-pointer"
+            className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded cursor-pointer"
           >
             Sign Out
           </button>
@@ -149,7 +149,7 @@ const AdminClient = () => {
         <div
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
-          className="border-2 border-dashed p-6 rounded-lg text-center cursor-pointer bg-white hover:bg-gray-50 transition"
+          className="border-2 border-dashed p-6 rounded text-center cursor-pointer bg-white hover:bg-gray-50 transition"
         >
           <label className="cursor-pointer block">
             <Upload className="w-6 h-6 mx-auto text-gray-500" />
@@ -176,7 +176,7 @@ const AdminClient = () => {
             .map((img, idx) => (
               <div
                 key={img.id}
-                className="border rounded-lg overflow-hidden bg-white shadow"
+                className="border rounded-sm overflow-hidden bg-white shadow"
               >
                 <div className="relative aspect-square">
                   <Image
@@ -225,7 +225,7 @@ const AdminClient = () => {
           <div className="text-center">
             <button
               onClick={handleSaveOrder}
-              className="mt-4 px-6 py-2 bg-blue text-white rounded-lg hover:bg-darkblue"
+              className="mt-4 px-6 py-2 bg-blue text-white rounded hover:bg-darkblue"
             >
               <Save className="inline-block mr-2" size={16} />
               Save Order

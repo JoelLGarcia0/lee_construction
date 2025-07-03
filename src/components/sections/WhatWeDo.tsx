@@ -42,7 +42,7 @@ const WhatWeDo = () => {
 
           <motion.a
             href="/services"
-            className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded-sm text-md font-bold transition-all"
+            className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded text-md font-bold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
           >

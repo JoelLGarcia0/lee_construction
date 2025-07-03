@@ -47,7 +47,7 @@ const Hero = () => {
         >
           <a
             href="tel:+3052167558"
-            className="inline-flex items-center gap-2 uppercase bg-rust/80 px-6 py-3 rounded-sm text-white text-md font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
+            className="inline-flex items-center gap-2 uppercase bg-rust/80 px-6 py-3 rounded text-white text-md font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
           >
             <FaPhoneAlt className="text-white text-xl" />
             Call Now
