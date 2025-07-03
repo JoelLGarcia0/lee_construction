@@ -109,7 +109,7 @@ const ProjectSection = () => {
 
           <motion.a
             href="/projects"
-            className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
+            className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded-sm text-md font-bold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
           >

@@ -42,7 +42,7 @@ const WhatWeDo = () => {
 
           <motion.a
             href="/services"
-            className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded-lg text-md font-bold transition-all"
+            className="mt-10 inline-flex items-center shadow-lg text-white bg-blue px-6 py-3 rounded-sm text-md font-bold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -66,7 +66,7 @@ const WhatWeDo = () => {
         <div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
 
-          <Card className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+          <Card className="relative h-80 w-full overflow-hidden rounded-md shadow-lg bg-transparent border-none">
             {/* Background Image */}
             <Image
               src={images.baptist}
@@ -88,7 +88,7 @@ const WhatWeDo = () => {
 
           {/* Card 2 */}
 
-          <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+          <Card className="relative w-full h-80 overflow-hidden rounded-md shadow-lg bg-transparent border-none">
             {/* Background Image */}
             <Image
               src={images.ftschool}
@@ -110,7 +110,7 @@ const WhatWeDo = () => {
 
           {/* Card 3 */}
 
-          <Card className="relative w-full h-80 overflow-hidden rounded-lg shadow-lg bg-transparent border-none">
+          <Card className="relative w-full h-80 overflow-hidden rounded-md shadow-lg bg-transparent border-none">
             {/* Background Image */}
             <Image
               src={images.county}

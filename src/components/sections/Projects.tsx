@@ -68,7 +68,7 @@ const Projects = () => {
                   ease: "easeOut",
                   delay: index * 0.05,
                 }}
-                className="relative w-full aspect-square bg-gray-600 rounded-lg overflow-hidden"
+                className="relative w-full aspect-square bg-gray-600 rounded-md overflow-hidden"
               >
                 <Image
                   src={img.src}

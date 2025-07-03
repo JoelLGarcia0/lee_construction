@@ -119,7 +119,7 @@ const NavBar = () => {
               <Button
                 asChild
                 onClick={handleContactClick}
-                className="px-6 py-5 bg-blue text-md text-white font-bold rounded-lg hover:bg-darkblue"
+                className="px-6 py-5 bg-blue text-md text-white font-bold hover:bg-darkblue"
               >
                 <Link href="#contact">Contact Us</Link>
               </Button>

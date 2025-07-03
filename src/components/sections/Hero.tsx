@@ -27,7 +27,7 @@ const Hero = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-4xl text-center px-12 mt-10 text-white">
-        <h1 className="text-4xl  font-bold uppercase mb-2  underline md:py-2">
+        <h1 className="text-5xl  font-bold uppercase mb-2  md:py-2">
           Commercial contractors
         </h1>
         <h1 className="text-xl md:text-2xl">
@@ -47,7 +47,7 @@ const Hero = () => {
         >
           <a
             href="tel:+3052167558"
-            className="inline-flex items-center gap-2 uppercase bg-rust/80 px-6 py-3 rounded-lg text-white text-md font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
+            className="inline-flex items-center gap-2 uppercase bg-rust/80 px-6 py-3 rounded-sm text-white text-md font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
           >
             <FaPhoneAlt className="text-white text-xl" />
             Call Now
