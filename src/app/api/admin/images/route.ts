@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 
+type ProjectImageInput = {
+  src: string;
+  alt: string;
+  publicId?: string;
+};
+
 export async function GET() {
   try {
     const images = await prisma.projectImage.findMany({
@@ -16,17 +22,29 @@ export async function GET() {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
+    const images: ProjectImageInput[] = body.images;
 
-    // Clear existing images and insert new ones
+    if (
+      !Array.isArray(images) ||
+      images.some(
+        (img) => typeof img.src !== "string" || typeof img.alt !== "string"
+      )
+    ) {
+      return NextResponse.json(
+        { error: "Invalid image data" },
+        { status: 400 }
+      );
+    }
+
     await prisma.projectImage.deleteMany();
 
-    if (body.images && body.images.length > 0) {
+    if (images.length > 0) {
       await prisma.projectImage.createMany({
-        data: body.images.map((image: any, index: number) => ({
+        data: images.map((image, index) => ({
           src: image.src,
           alt: image.alt,
+          publicId: image.publicId ?? null,
           order: index,
-          publicId: image.publicId || null,
         })),
       });
     }
