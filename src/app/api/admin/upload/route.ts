@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
-import { redis } from "@/lib/redis";
+import prisma from "@/lib/db";
 
 export async function POST(req: Request) {
   const formData = await req.formData();
@@ -41,18 +41,20 @@ export async function POST(req: Request) {
         .end(buffer);
     });
 
-    const image = {
-      id: Date.now().toString(),
-      src: uploadRes.secure_url,
-      alt: uploadRes.original_filename,
-      publicId: uploadRes.public_id,
-      order: 0,
-    };
+    // Get the current highest order
+    const maxOrder = await prisma.projectImage.aggregate({
+      _max: { order: true },
+    });
+    const newOrder = (maxOrder._max.order || -1) + 1;
 
-    const current = ((await redis.get("lee-images")) as ImageData[]) || [];
-    image.order = current.length;
-    const updated = [...current, image];
-    await redis.set("lee-images", updated);
+    const image = await prisma.projectImage.create({
+      data: {
+        src: uploadRes.secure_url,
+        alt: uploadRes.original_filename,
+        publicId: uploadRes.public_id,
+        order: newOrder,
+      },
+    });
 
     return NextResponse.json(image);
   } catch (err) {

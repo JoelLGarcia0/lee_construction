@@ -1,43 +1,52 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import prisma from "@/lib/db";
 import cloudinary from "@/lib/cloudinary";
-
-interface ImageData {
-  id: string;
-  src: string;
-  alt: string;
-  order: number;
-  publicId?: string;
-}
 
 export async function DELETE(
   _req: Request,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params;
-  const current = (await redis.get("lee-images")) as ImageData[];
+  try {
+    const { id } = await context.params;
 
-  if (!current)
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    const imageToDelete = await prisma.projectImage.findUnique({
+      where: { id },
+    });
 
-  const imageToDelete = current.find((img) => img.id === id);
-
-  if (!imageToDelete) {
-    return NextResponse.json({ error: "Image not found" }, { status: 404 });
-  }
-
-  // Remove from Cloudinary
-  if (imageToDelete.publicId) {
-    try {
-      await cloudinary.uploader.destroy(imageToDelete.publicId);
-    } catch (error) {
-      console.error("Cloudinary delete error:", error);
+    if (!imageToDelete) {
+      return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
+
+    // Remove from Cloudinary
+    if (imageToDelete.publicId) {
+      try {
+        await cloudinary.uploader.destroy(imageToDelete.publicId);
+      } catch (error) {
+        console.error("Cloudinary delete error:", error);
+      }
+    }
+
+    // Delete from database
+    await prisma.projectImage.delete({
+      where: { id },
+    });
+
+    // Reorder remaining images
+    const remainingImages = await prisma.projectImage.findMany({
+      orderBy: { order: "asc" },
+    });
+
+    // Update orders for remaining images
+    for (let i = 0; i < remainingImages.length; i++) {
+      await prisma.projectImage.update({
+        where: { id: remainingImages[i].id },
+        data: { order: i },
+      });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Delete failed:", err);
+    return NextResponse.json({ error: "Delete failed" }, { status: 500 });
   }
-
-  const filtered = current.filter((img) => img.id !== id);
-  filtered.forEach((img, idx) => (img.order = idx));
-  await redis.set("lee-images", filtered);
-
-  return NextResponse.json({ success: true });
 }
