@@ -70,6 +70,8 @@ const NavBar = () => {
           height={80}
           src={icons.leelogoPng}
           alt="LEE Construction Logo"
+          priority
+          style={{ height: "auto" }}
         />
 
         {/* Desktop Navigation */}

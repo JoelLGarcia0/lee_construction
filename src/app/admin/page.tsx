@@ -1,13 +1,22 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+// app/admin/page.tsx
+"use client";
+
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import AdminClient from "@/components/sections/AdminClient";
 
-export default async function AdminPage() {
-  const { userId } = await auth();
+export default function AdminPage() {
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
 
-  if (!userId) {
-    redirect("/login");
-  }
+  useEffect(() => {
+    if (!isSignedIn) {
+      router.replace("/login");
+    }
+  }, [isSignedIn]);
+
+  if (!isSignedIn) return null;
 
   return <AdminClient />;
 }
