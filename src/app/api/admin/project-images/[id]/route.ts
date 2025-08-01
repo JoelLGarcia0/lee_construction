@@ -9,11 +9,14 @@ export async function DELETE(
   try {
     const { id } = await context.params;
 
+    await prisma.$connect();
+
     const imageToDelete = await prisma.projectImage.findUnique({
       where: { id },
     });
 
     if (!imageToDelete) {
+      await prisma.$disconnect();
       return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
 
@@ -44,9 +47,11 @@ export async function DELETE(
       });
     }
 
+    await prisma.$disconnect();
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Delete failed:", err);
+    await prisma.$disconnect();
     return NextResponse.json({ error: "Delete failed" }, { status: 500 });
   }
 }

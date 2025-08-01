@@ -9,12 +9,18 @@ type ProjectImageInput = {
 
 export async function GET() {
   try {
+    // Check if we can connect to the database
+    await prisma.$connect();
+
     const images = await prisma.projectImage.findMany({
       orderBy: { order: "asc" },
     });
+
+    await prisma.$disconnect();
     return NextResponse.json({ images });
   } catch (err) {
     console.error("Failed to get images from database:", err);
+    await prisma.$disconnect();
     return NextResponse.json({ images: [] }, { status: 500 });
   }
 }
@@ -36,6 +42,7 @@ export async function PUT(req: Request) {
       );
     }
 
+    await prisma.$connect();
     await prisma.projectImage.deleteMany();
 
     if (images.length > 0) {
@@ -49,9 +56,11 @@ export async function PUT(req: Request) {
       });
     }
 
+    await prisma.$disconnect();
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Failed to update images:", err);
+    await prisma.$disconnect();
     return NextResponse.json(
       { error: "Failed to update images" },
       { status: 500 }

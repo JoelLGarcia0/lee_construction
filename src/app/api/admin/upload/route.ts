@@ -41,6 +41,8 @@ export async function POST(req: Request) {
         .end(buffer);
     });
 
+    await prisma.$connect();
+
     // Get the current highest order
     const maxOrder = await prisma.projectImage.aggregate({
       _max: { order: true },
@@ -56,9 +58,11 @@ export async function POST(req: Request) {
       },
     });
 
+    await prisma.$disconnect();
     return NextResponse.json(image);
   } catch (err) {
     console.error("Upload failed:", err);
+    await prisma.$disconnect();
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }
