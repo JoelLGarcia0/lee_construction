@@ -58,6 +58,9 @@ export const metadata: Metadata = {
       "Providing professional construction services across healthcare, education, and government sectors.",
     images: ["https://www.leecgi.com/images/og-image.jpg"],
   },
+  verification: {
+    google: "sRGc2hlbfzMvcgmPk0ytyZpqAeDctHnhjmejz2su3JE",
+  },
 };
 
 export default function RootLayout({
