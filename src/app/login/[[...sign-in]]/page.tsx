@@ -4,6 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SignIn } from "@clerk/nextjs";
+import Head from "next/head";
 
 export default function LoginPage() {
   const { isSignedIn } = useAuth();
@@ -16,13 +17,18 @@ export default function LoginPage() {
   }, [isSignedIn, router]);
 
   return (
-    <div className="flex justify-center pt-24 pb-12 min-h-screen">
-      <SignIn
-        routing="path"
-        path="/login"
-        signInUrl="/login"
-        forceRedirectUrl="/admin"
-      />
-    </div>
+    <>
+      <Head>
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+      </Head>
+      <div className="flex justify-center pt-24 pb-12 min-h-screen">
+        <SignIn
+          routing="path"
+          path="/login"
+          signInUrl="/login"
+          forceRedirectUrl="/admin"
+        />
+      </div>
+    </>
   );
 }

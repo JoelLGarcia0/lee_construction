@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/icons/leelogo.ico",
   },
-  metadataBase: new URL("https://lee-construction.vercel.app"),
+  metadataBase: new URL("https://www.leecgi.com"),
   keywords: [
     "commercial construction",
     "healthcare contractors",
@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     title: "LEE Construction Group | Commercial Contractors",
     description:
       "Specializing in high-quality construction projects for healthcare, education, federal, and municipal sectors.",
-    url: "https://lee-construction.vercel.app/",
+    url: "https://www.leecgi.com/",
     siteName: "LEE Construction Group Inc",
     images: [
       {
-        url: "https://lee-construction.vercel.app/images/og-image.jpg",
+        url: "https://www.leecgi.com/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Construction site with cranes and building structures",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "LEE Construction Group | Commercial Contractors",
     description:
       "Providing professional construction services across healthcare, education, and government sectors.",
-    images: ["https://lee-construction.vercel.app/images/og-image.jpg"],
+    images: ["https://www.leecgi.com/images/og-image.jpg"],
   },
 };
 
