@@ -309,7 +309,7 @@ const Projects = () => {
             Ready to Start Your Project?
           </h1>
           <p className="text-xl text-white/90 mb-8">
-            Let's discuss how we can bring your vision to life with our
+            Let&apos;s discuss how we can bring your vision to life with our
             expertise and dedication.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
