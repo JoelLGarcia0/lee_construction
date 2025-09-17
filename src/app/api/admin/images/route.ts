@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 type ProjectImageInput = {
   src: string;
   alt: string;
+  category: string;
   publicId?: string;
 };
 
@@ -33,7 +34,10 @@ export async function PUT(req: Request) {
     if (
       !Array.isArray(images) ||
       images.some(
-        (img) => typeof img.src !== "string" || typeof img.alt !== "string"
+        (img) =>
+          typeof img.src !== "string" ||
+          typeof img.alt !== "string" ||
+          typeof img.category !== "string"
       )
     ) {
       return NextResponse.json(
@@ -50,6 +54,7 @@ export async function PUT(req: Request) {
         data: images.map((image, index) => ({
           src: image.src,
           alt: image.alt,
+          category: image.category,
           publicId: image.publicId ?? null,
           order: index,
         })),

@@ -5,9 +5,20 @@ import prisma from "@/lib/db";
 export async function POST(req: Request) {
   const formData = await req.formData();
   const file = formData.get("image") as File;
+  const category = formData.get("category") as string;
 
   if (!file) {
     return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+  }
+
+  if (
+    !category ||
+    !["healthcare", "education", "government", "private"].includes(category)
+  ) {
+    return NextResponse.json(
+      { error: "Valid category required" },
+      { status: 400 }
+    );
   }
 
   const arrayBuffer = await file.arrayBuffer();
@@ -43,8 +54,9 @@ export async function POST(req: Request) {
 
     await prisma.$connect();
 
-    // Get the current highest order
+    // Get the current highest order for this category
     const maxOrder = await prisma.projectImage.aggregate({
+      where: { category },
       _max: { order: true },
     });
     const newOrder = (maxOrder._max.order || -1) + 1;
@@ -53,6 +65,7 @@ export async function POST(req: Request) {
       data: {
         src: uploadRes.secure_url,
         alt: uploadRes.original_filename,
+        category,
         publicId: uploadRes.public_id,
         order: newOrder,
       },

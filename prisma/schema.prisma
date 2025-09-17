@@ -12,6 +12,7 @@ model ProjectImage {
   src       String
   alt       String
   order     Int
+  category  String   @default("private") // healthcare, education, government, private
   publicId  String?
   createdAt DateTime @default(now())
 }

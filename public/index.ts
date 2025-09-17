@@ -37,6 +37,8 @@ export const images = {
   insideHospital: "/images/insidehospital.jpeg",
   memorial: "/images/MPCMiramar.jpeg",
   dashHighSchool: "/images/dashimage.jpg",
+  private: "/images/privatetab.jpg",
+  private2: "/images/privatetab2.jpg",
 };
 export const logos = {
   baptist: "/logos/baptist.png",

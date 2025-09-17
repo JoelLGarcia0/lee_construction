@@ -1,18 +1,40 @@
+"use client";
+
+import Image from "next/image";
+
 import React from "react";
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { images } from "../../../public";
 
 const OurOffice = () => {
   return (
     <section
       id="ouroffice"
-      className="py-12 w-full px-8 flex justify-center overflow-hidden bg-greybg text-center"
+      className="relative py-12 w-full px-8 flex justify-center overflow-hidden text-center"
     >
-      <div className="w-full max-w-5xl p-6">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={images.whatWeDoBg}
+          alt="Construction workers background"
+          fill
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+          quality={100}
+          priority
+        />
+        {/* Blue Overlay */}
+        <div className="absolute inset-0 bg-darkblue/90"></div>
+      </div>
+
+      <div className="relative w-full max-w-5xl p-6">
         {/* Content Layout */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
           {/* Left: Office Info */}
           <div className="w-full md:w-1/2 flex flex-col items-start space-y-4 text-left text-darkblue">
-            <h1 className="text-3xl font-bold text-darkblue text-center mb-6">
+            <h1 className="text-3xl font-bold text-white text-center mb-6">
               Our Office
             </h1>
 
@@ -20,9 +42,9 @@ const OurOffice = () => {
               <FaMapMarkerAlt className="text-blue text-5xl" />
 
               <div>
-                <h2 className="text-lg font-semibold">Miami Office</h2>
-                <p className="text-gray-800 py-2">9771 South Dixie Hwy</p>
-                <p className="text-gray-800 py-2">Miami, Florida 33156</p>
+                <h2 className="text-xl text-white font-bold">Miami Office</h2>
+                <p className="text-white py-2">9771 South Dixie Hwy</p>
+                <p className="text-white py-2">Pinecrest, Florida 33156</p>
               </div>
             </div>
 
@@ -30,9 +52,9 @@ const OurOffice = () => {
               <FaPhoneAlt className="text-blue text-5xl" />
 
               <div>
-                <h2 className="text-lg font-semibold py-2">Contact</h2>
+                <h2 className="text-xl text-white font-bold py-2">Contact</h2>
 
-                <p className="text-gray-700">(305) 216-7558</p>
+                <p className="text-white">(305)-216-7558</p>
               </div>
             </div>
           </div>

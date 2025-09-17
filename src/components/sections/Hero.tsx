@@ -7,63 +7,77 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-[85vh] flex items-center justify-center ">
-      {/* Background Image */}
+    <section className="relative w-full h-[85vh] flex items-center justify-center">
+      {/* Background */}
       <div className="absolute inset-0">
         <Image
           src={images.hero}
-          alt="Construction Background"
+          alt="Commercial construction project background"
           fill
-          style={{
-            objectFit: "cover",
-            objectPosition: "right",
-          }}
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "right" }}
           quality={100}
           priority
         />
-        {/* Black Overlay */}
-        <div className="absolute inset-0 bg-black/75"></div>
+        {/* Dark gradient overlay for legibility */}
+        <div className="absolute inset-0 bg-black/70"></div>
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-4xl text-center px-12 mt-10 text-white">
-        <h1 className="text-5xl  font-bold uppercase mb-2  md:py-2">
-          Commercial contractors
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-5xl px-6 md:px-12 text-white mt-6">
+        <span className="inline-block rounded-full bg-white/10 backdrop-blur px-3 py-1 text-xs md:text-sm tracking-wide uppercase">
+          Licensed & Insured • Since 2006
+        </span>
+
+        <h1 className="mt-3 text-5xl md:text-6xl font-extrabold leading-tight uppercase">
+          Commercial Contractors
         </h1>
-        <h1 className="text-xl md:text-2xl">
-          Specializing in Healthcare, Education, Federal, and Municipal
+
+        <p className="mt-3 text-base md:text-xl max-w-2xl">
+          Specializing in Healthcare , Education , Federal , and Municipal
           Projects.
-        </h1>
-        <p className="mt-4 text-sm md:text-lg">
-          Linking people, places, projects, and passion
         </p>
 
-        {/* CTA Button */}
+        <p className="mt-2 text-sm md:text-lg font-thin text-white">
+          Linking people, places, projects, and passion.
+        </p>
+
+        {/* CTAs */}
         <motion.div
-          className="mt-6 flex justify-center "
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-6 flex flex-wrap items-center gap-4"
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <a
-            href="tel:+3052167558"
-            className="inline-flex items-center gap-2 uppercase bg-rust/80 px-6 py-3 rounded text-white text-md font-semibold transition-transform duration-300 shadow-lg hover:translate-y-1"
+            href="tel:+13052167558"
+            aria-label="Call Lee Construction Group at 305-216-7558"
+            className="inline-flex items-center gap-2 uppercase bg-rust/90 px-3 py-3 rounded text-white text-sm font-semibold transition-transform duration-300 shadow-lg hover:translate-y-0.5"
           >
             <FaPhoneAlt className="text-white text-xl" />
-            Call Now
+            Call 305-216-7558
+          </a>
+
+          <a
+            href="#contact"
+            className="inline-flex items-center uppercase px-3 py-3 rounded border border-white/40 text-white/90 text-sm font-semibold hover:bg-white/10 transition"
+          >
+            Request a Proposal
           </a>
         </motion.div>
 
-        {/* Discover More + Scroll Arrow */}
+        {/* Scroll*/}
         <motion.div
-          className="mt-6 flex flex-col items-center text-center"
+          className="mt-12 flex flex-col items-center text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <p className="text-white pb-2 text-md">Discover More</p>
-          <a href="#our-company">
-            <FaRegArrowAltCircleDown className="text-white text-4xl cursor-pointer hover:scale-110 hover:translate-y-2 transition-all duration-300 mt-2" />
+          <p className="pb-3 text-sm md:text-base text-white/90">
+            Explore Our Company
+          </p>
+          <a href="#our-company" aria-label="Scroll to Our Company section">
+            <FaRegArrowAltCircleDown className="text-white text-4xl cursor-pointer hover:scale-110 hover:translate-y-1 transition-all duration-300" />
           </a>
         </motion.div>
       </div>

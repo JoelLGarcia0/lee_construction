@@ -5,6 +5,7 @@ import { images } from "../../../public";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const WhatWeDo = () => {
   return (
@@ -63,72 +64,102 @@ const WhatWeDo = () => {
 
         {/* Card Container */}
 
-        <div className=" w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className=" w-full grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1 */}
 
-          <Card className="relative h-80 w-full overflow-hidden rounded-md shadow-lg bg-transparent border-none">
-            {/* Background Image */}
-            <Image
-              src={images.baptist}
-              alt="Healthcare Construction"
-              fill
-              style={{
-                objectFit: "cover",
-                objectPosition: "center",
-              }}
-              className="rounded-md"
-            />
-            {/* Blue Overlay */}
-            <div className="absolute inset-0 bg-darkblue/30"></div>
-            {/* Title */}
-            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-              Healthcare
-            </div>
-          </Card>
+          <Link href="/projects#healthcare" className="group">
+            <Card className="relative h-60 w-full overflow-hidden rounded-md shadow-lg bg-transparent border-none transition-transform group-hover:scale-[1.01]">
+              {/* Background Image */}
+              <Image
+                src={images.baptist}
+                alt="Healthcare Construction"
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+                className="rounded-md"
+              />
+              {/* Blue Overlay */}
+              <div className="absolute inset-0 bg-darkblue/30 transition-colors group-hover:bg-darkblue/40"></div>
+              {/* Title */}
+              <div className="absolute top-0 w-full text-center font-semibold  bg-blue text-white px-4 py-3">
+                Healthcare
+              </div>
+            </Card>
+          </Link>
 
           {/* Card 2 */}
 
-          <Card className="relative w-full h-80 overflow-hidden rounded-md shadow-lg bg-transparent border-none">
-            {/* Background Image */}
-            <Image
-              src={images.ftschool}
-              alt="Healthcare Construction"
-              fill
-              style={{
-                objectFit: "cover",
-                objectPosition: " 75% center",
-              }}
-              className="rounded-md"
-            />
-            {/* Blue Overlay */}
-            <div className="absolute inset-0 bg-darkblue/30"></div>
-            {/* Title */}
-            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-              Education
-            </div>
-          </Card>
+          <Link href="/projects#education" className="group">
+            <Card className="relative w-full h-60 overflow-hidden rounded-md shadow-lg bg-transparent border-none transition-transform group-hover:scale-[1.01]">
+              {/* Background Image */}
+              <Image
+                src={images.ftschool}
+                alt="Education Construction"
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: " 75% center",
+                }}
+                className="rounded-md"
+              />
+              {/* Blue Overlay */}
+              <div className="absolute inset-0 bg-darkblue/30 transition-colors group-hover:bg-darkblue/40"></div>
+              {/* Title */}
+              <div className="absolute top-0 w-full text-center font-semibold bg-[#40AD53] text-white px-4 py-3">
+                Education
+              </div>
+            </Card>
+          </Link>
 
-          {/* Card 3 */}
+          {/* Card 4 */}
 
-          <Card className="relative w-full h-80 overflow-hidden rounded-md shadow-lg bg-transparent border-none">
-            {/* Background Image */}
-            <Image
-              src={images.county}
-              alt="Healthcare Construction"
-              fill
-              style={{
-                objectFit: "cover",
-                objectPosition: "center 20%",
-              }}
-              className="rounded-md"
-            />
-            {/* Blue Overlay */}
-            <div className="absolute inset-0 bg-darkblue/30"></div>
-            {/* Title */}
-            <div className="absolute top-0 w-full text-center bg-blue text-white px-4 py-3">
-              Government
-            </div>
-          </Card>
+          <Link href="/projects#government" className="group">
+            <Card className="relative w-full h-60 overflow-hidden rounded-md shadow-lg bg-transparent border-none transition-transform group-hover:scale-[1.01]">
+              {/* Background Image */}
+              <Image
+                src={images.county}
+                alt="Government Construction"
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                }}
+                className="rounded-md"
+              />
+
+              {/* Blue Overlay */}
+              <div className="absolute inset-0 bg-darkblue/30 transition-colors group-hover:bg-darkblue/40"></div>
+              {/* Title */}
+              <div className="absolute top-0 w-full text-center font-semibold  bg-[#C2B234] text-white px-4 py-3">
+                Government
+              </div>
+            </Card>
+          </Link>
+
+          <Link href="/projects#private" className="group">
+            <Card className="relative w-full h-60 overflow-hidden rounded-md shadow-lg bg-transparent border-none transition-transform group-hover:scale-[1.01]">
+              {/* Background Image */}
+              <Image
+                src={images.private2}
+                alt="Private Construction"
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center 30%",
+                }}
+                className="rounded-md"
+              />
+
+              {/* Blue Overlay */}
+              <div className="absolute inset-0 bg-darkblue/30 transition-colors group-hover:bg-darkblue/40"></div>
+              {/* Title */}
+              <div className="absolute top-0 w-full font-semibold text-center bg-rust text-white px-4 py-3">
+                Private
+              </div>
+            </Card>
+          </Link>
         </div>
       </div>
     </section>
