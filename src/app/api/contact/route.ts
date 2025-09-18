@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     // Email options
     const mailOptions = {
       from: `"Webpage Contact Form <${process.env.EMAIL_USER}>`,
-      to: "joellorenzogarcia0@gmail.com",
+      to: "joellorenzogarcia0@gmail.com, rbarouh@leecgi.com",
       subject: "New Lee Construction Inquiry",
       text: `Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
     };
