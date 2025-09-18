@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "LEE Construction Group Inc",
     images: [
       {
-        url: "https://www.leecgi.com/images/og-image.jpg",
+        url: "https://www.leecgi.com/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Construction site with cranes and building structures",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "LEE Construction Group | Commercial Contractors",
     description:
       "Providing professional construction services across healthcare, education, and government sectors.",
-    images: ["https://www.leecgi.com/images/og-image.jpg"],
+    images: ["https://www.leecgi.com/images/og-image.png"],
   },
   verification: {
     google: "sRGc2hlbfzMvcgmPk0ytyZpqAeDctHnhjmejz2su3JE",
