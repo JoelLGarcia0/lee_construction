@@ -60,7 +60,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch("/api/admin/images");
+        const res = await fetch("/api/images");
         const data = await res.json();
         setImages(data.images || []);
       } catch (err) {

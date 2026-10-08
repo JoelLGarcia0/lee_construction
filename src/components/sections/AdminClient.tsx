@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { logout } from "@/app/login/actions";
 import { Upload, Trash2, Save, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
+import { MAX_UPLOAD_BYTES, isImageFile } from "@/lib/uploads";
 
 interface ImageData {
   id: string;
@@ -18,6 +19,7 @@ interface ImageData {
 const AdminClient = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<string>("healthcare");
 
@@ -42,39 +44,109 @@ const AdminClient = () => {
     }
   };
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
+  // Upload one file straight to Cloudinary, then record it in our database.
+  // Throws an Error with a user-facing message on failure.
+  const uploadFile = async (
+    file: File,
+    sig: Record<string, string | number>
+  ): Promise<ImageData> => {
+    if (file.size > MAX_UPLOAD_BYTES) {
+      const sizeMb = (file.size / 1024 / 1024).toFixed(1);
+      throw new Error(`File is ${sizeMb} MB (max is 10 MB)`);
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("api_key", String(sig.apiKey));
+    formData.append("timestamp", String(sig.timestamp));
+    formData.append("signature", String(sig.signature));
+    formData.append("folder", String(sig.folder));
+    formData.append("format", String(sig.format));
+
+    const cloudRes = await fetch(
+      `https://api.cloudinary.com/v1_1/${sig.cloudName}/image/upload`,
+      { method: "POST", body: formData }
+    );
+    const cloudData = await cloudRes.json();
+    if (!cloudRes.ok) {
+      throw new Error(cloudData.error?.message || "Cloudinary upload failed");
+    }
+
+    const saveRes = await fetch("/api/admin/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        publicId: cloudData.public_id,
+        version: cloudData.version,
+        signature: cloudData.signature,
+        secureUrl: cloudData.secure_url,
+        originalFilename: cloudData.original_filename,
+        category: selectedCategory,
+      }),
+    });
+    const saved = await saveRes.json();
+    if (!saveRes.ok) {
+      throw new Error(saved.error || "Failed to save image");
+    }
+    return saved;
+  };
+
+  const handleUpload = async (files: File[]) => {
+    if (files.length === 0) return;
 
     setLoading(true);
 
     try {
+      const sigRes = await fetch("/api/admin/upload/sign", { method: "POST" });
+      if (!sigRes.ok) {
+        toast.error(
+          sigRes.status === 401
+            ? "Your session expired. Please sign in again."
+            : "Could not start upload. Please try again."
+        );
+        return;
+      }
+      const sig = await sigRes.json();
+
       const uploadedImages: ImageData[] = [];
+      const failures: string[] = [];
 
-      for (const file of files) {
-        const formData = new FormData();
-        formData.append("image", file);
-        formData.append("category", selectedCategory);
-
-        const res = await fetch("/api/admin/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        const data = await res.json();
-        if (res.ok) {
-          uploadedImages.push(data);
+      for (const [i, file] of files.entries()) {
+        setUploadProgress(`Uploading ${i + 1} of ${files.length}…`);
+        try {
+          uploadedImages.push(await uploadFile(file, sig));
+        } catch (err) {
+          const reason = err instanceof Error ? err.message : "Unknown error";
+          failures.push(`${file.name}: ${reason}`);
         }
       }
 
       setImages((prev) => [...prev, ...uploadedImages]);
-      toast.success("Upload complete!");
+
+      if (uploadedImages.length > 0) {
+        toast.success(
+          `Uploaded ${uploadedImages.length} of ${files.length} image${
+            files.length === 1 ? "" : "s"
+          }`
+        );
+      }
+      for (const failure of failures) {
+        toast.error(`Upload failed — ${failure}`, { duration: 15000 });
+      }
     } catch (err) {
       console.error(err);
-      toast.error("Upload failed");
+      toast.error("Upload failed. Check your connection and try again.");
     } finally {
       setLoading(false);
+      setUploadProgress("");
     }
+  };
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    // Reset so picking the same file again still triggers onChange.
+    e.target.value = "";
+    handleUpload(files);
   };
 
   const handleDelete = async (id: string) => {
@@ -130,42 +202,29 @@ const AdminClient = () => {
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const files = Array.from(e.dataTransfer.files).filter((file) =>
-      file.type.startsWith("image/")
-    );
+    const dropped = Array.from(e.dataTransfer.files);
+    const files = dropped.filter(isImageFile);
 
-    if (files.length === 0) return;
+    for (const skipped of dropped.filter((file) => !isImageFile(file))) {
+      toast.error(`Skipped ${skipped.name} — not an image file`);
+    }
 
-    // Convert to DataTransfer to simulate input behavior
-    const dataTransfer = new DataTransfer();
-    files.forEach((file) => dataTransfer.items.add(file));
-
-    // Trigger handleUpload using a synthetic input event
-    const fakeEvent = {
-      target: { files: dataTransfer.files },
-    } as unknown as React.ChangeEvent<HTMLInputElement>;
-
-    handleUpload(fakeEvent);
+    handleUpload(files);
   };
-  const { signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-    toast.success("Signed out successfully");
-  };
-
   return (
     <div className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Admin Panel</h1>
 
-          <button
-            onClick={handleSignOut}
-            className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded cursor-pointer"
-          >
-            Sign Out
-          </button>
+          <form action={logout}>
+            <button
+              type="submit"
+              className="text-white bg-blue hover:bg-darkblue px-4 py-2 rounded cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </form>
         </div>
 
         {/* Category Selection */}
@@ -204,17 +263,25 @@ const AdminClient = () => {
               </strong>{" "}
               category
             </span>
+            <span className="block text-xs text-gray-400 mt-1">
+              JPG, PNG, or iPhone HEIC photos up to 10 MB
+            </span>
             <input
               type="file"
               multiple
-              onChange={handleUpload}
+              accept="image/*,.heic,.heif"
+              onChange={handleFileInput}
+              disabled={loading}
               className="hidden"
               id="fileInput"
             />
           </label>
 
           {loading && (
-            <Loader2 className="animate-spin mx-auto mt-3 text-gray-500" />
+            <div className="mt-3 flex items-center justify-center gap-2 text-sm text-gray-600">
+              <Loader2 className="animate-spin text-gray-500" />
+              {uploadProgress}
+            </div>
           )}
         </div>
 

@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
-import { auth } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
 import AdminClient from "@/components/sections/AdminClient";
 import type { Metadata } from "next";
 
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage() {
-  const { userId } = await auth();
+  // Middleware already guards /admin; this is a second check at render time.
+  const token = (await cookies()).get(SESSION_COOKIE)?.value;
 
-  if (!userId) {
+  if (!(await verifySessionToken(token))) {
     redirect("/login");
   }
 

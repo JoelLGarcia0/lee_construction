@@ -1,57 +1,42 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
 import prisma from "@/lib/db";
+import { CATEGORIES, UPLOAD_FOLDER } from "@/lib/uploads";
 
+// The browser uploads the file directly to Cloudinary (see ./sign), then calls
+// this route with Cloudinary's response so we can record it in the database.
 export async function POST(req: Request) {
-  const formData = await req.formData();
-  const file = formData.get("image") as File;
-  const category = formData.get("category") as string;
+  const { publicId, version, signature, secureUrl, originalFilename, category } =
+    await req.json();
 
-  if (!file) {
-    return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
-  }
-
-  if (
-    !category ||
-    !["healthcare", "education", "government", "private"].includes(category)
-  ) {
+  if (!category || !CATEGORIES.includes(category)) {
     return NextResponse.json(
       { error: "Valid category required" },
       { status: 400 }
     );
   }
 
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
+  // Confirm this upload really came from our Cloudinary account and folder.
+  const urlPrefix = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/`;
+  const isGenuine =
+    typeof secureUrl === "string" &&
+    secureUrl.startsWith(urlPrefix) &&
+    typeof publicId === "string" &&
+    publicId.startsWith(`${UPLOAD_FOLDER}/`) &&
+    signature ===
+      cloudinary.utils.api_sign_request(
+        { public_id: publicId, version },
+        process.env.CLOUDINARY_API_SECRET!
+      );
+
+  if (!isGenuine) {
+    return NextResponse.json(
+      { error: "Invalid upload signature" },
+      { status: 400 }
+    );
+  }
 
   try {
-    const uploadRes = await new Promise<{
-      secure_url: string;
-      original_filename: string;
-      public_id: string;
-    }>((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            folder: "lee-construction-projects",
-          },
-          (error, result) => {
-            if (error) {
-              reject(error);
-            } else if (result) {
-              resolve({
-                secure_url: result.secure_url,
-                original_filename: result.original_filename,
-                public_id: result.public_id,
-              });
-            } else {
-              reject(new Error("No result returned from Cloudinary"));
-            }
-          }
-        )
-        .end(buffer);
-    });
-
     await prisma.$connect();
 
     // Get the current highest order for this category
@@ -59,14 +44,14 @@ export async function POST(req: Request) {
       where: { category },
       _max: { order: true },
     });
-    const newOrder = (maxOrder._max.order || -1) + 1;
+    const newOrder = (maxOrder._max.order ?? -1) + 1;
 
     const image = await prisma.projectImage.create({
       data: {
-        src: uploadRes.secure_url,
-        alt: uploadRes.original_filename,
+        src: secureUrl,
+        alt: originalFilename || "Project image",
         category,
-        publicId: uploadRes.public_id,
+        publicId,
         order: newOrder,
       },
     });
@@ -74,8 +59,11 @@ export async function POST(req: Request) {
     await prisma.$disconnect();
     return NextResponse.json(image);
   } catch (err) {
-    console.error("Upload failed:", err);
+    console.error("Saving upload failed:", err);
     await prisma.$disconnect();
-    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Uploaded, but failed to save to database" },
+      { status: 500 }
+    );
   }
 }
