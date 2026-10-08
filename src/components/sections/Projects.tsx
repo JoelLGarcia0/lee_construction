@@ -80,17 +80,18 @@ const Projects = ({ images }: { images: ProjectImage[] }) => {
       {/* Sector jump bar */}
       <nav
         aria-label="Project sectors"
-        className="sticky top-20 z-40 mt-8 bg-white/95 backdrop-blur border-y border-gray-200 px-8"
+        className="sticky top-20 z-40 mt-8 bg-white/95 backdrop-blur border-y border-gray-200 px-4 sm:px-8"
       >
-        <ul className="max-w-6xl mx-auto flex gap-6 md:gap-10 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* All four sectors fit on phones: evenly spread, smaller text, no counts */}
+        <ul className="max-w-6xl mx-auto flex justify-between sm:justify-start gap-2 sm:gap-6 md:gap-10">
           {sectors.map((sector) => (
             <li key={sector.key} className="shrink-0">
               <a
                 href={`#${sector.key}`}
-                className="inline-flex items-baseline gap-2 py-4 font-title uppercase tracking-wide text-darkblue border-b-2 border-transparent hover:border-blue hover:text-blue transition-colors"
+                className="inline-flex items-baseline gap-2 py-4 font-title text-sm sm:text-base uppercase tracking-wide text-darkblue border-b-2 border-transparent hover:border-rust hover:text-blue transition-colors"
               >
                 {sector.title}
-                <span className="font-body text-sm text-gray-500 tracking-normal">
+                <span className="hidden sm:inline font-body text-sm text-gray-500 tracking-normal">
                   {sector.images.length}
                 </span>
               </a>
