@@ -10,8 +10,8 @@
   --max-width-xs: 768px;
 
   /* fonts */
-  --font-body: "Lato", sans-serif;
-  --font-title: "Oswald", sans-serif;
+  --font-body: var(--font-lato), sans-serif;
+  --font-title: var(--font-oswald), sans-serif;
 
   /* colors */
   --color-darkblue: #122a71;
@@ -56,16 +56,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-h2,
-h3,
-body {
-  font-family: var(--font-lato), sans-serif;
-}
-
-h1 {
-  font-family: var(--font-oswald), sans-serif;
-}
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -107,7 +97,12 @@ h1 {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+  /* Page and section headings: Oswald, uppercase, like job-site signage. */
+  h1,
+  h2 {
+    @apply font-title uppercase tracking-wide;
   }
 }
 
@@ -124,14 +119,65 @@ h1 {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background-color: #005bc3;
+  background-color: #b7410e;
   transition: width 0.3s ease-in-out;
 }
 
-.nav-underline:hover::after {
+.nav-underline:hover::after,
+.nav-underline-active::after {
   width: 100%;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Visible keyboard focus everywhere (mouse clicks don't trigger it). */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid #005bc3;
+  outline-offset: 3px;
+}
+/* On navy sections, a white outline stays visible. */
+.on-dark :where(a, button):focus-visible {
+  outline-color: #fff;
+}
+
+/* Hero load sequence: elements rise in one after another. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  animation: fade-up 0.6s ease-out both;
+}
+
+/* Scroll reveal: sections fade in once as they enter the viewport.
+   The `reveal-ready` class is only added by JS (see ScrollReveal), so
+   content is always visible if JS fails or motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Opacity only: a transform would shift sections while the browser
+     calculates where a #link should land, leaving headings under the navbar. */
+  .reveal-ready main section:not([data-no-reveal]) {
+    transition: opacity 0.7s ease-out;
+  }
+  .reveal-ready main section:not([data-no-reveal]):not(.is-visible) {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

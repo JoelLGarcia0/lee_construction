@@ -1,17 +1,17 @@
-"use client";
-
+import type { Metadata } from "next";
 import Title from "@/components/sections/Title";
-import { images } from "../../../public";
 import Careers from "@/components/sections/Careers";
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description:
+    "Join LEE Construction Group in Miami. Call our office for a list of current open positions.",
+};
 
 const CareersPage = () => {
   return (
     <main>
-      <Title
-        title="Careers"
-        image={images.workplace}
-        objectPosition="center 70%"
-      />
+      <Title title="Careers" />
       <Careers />
     </main>
   );

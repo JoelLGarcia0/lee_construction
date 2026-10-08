@@ -1,77 +1,72 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { images } from "../../../public";
+import { YEARS_IN_BUSINESS } from "@/lib/company";
+import { button, buttonArrow } from "@/lib/styles";
 
-import { motion } from "framer-motion";
-import { FiCheckCircle } from "react-icons/fi";
+// "Over N years of Experience": full years since the 2006 founding (20 in 2026).
+const yearsOfExperience = YEARS_IN_BUSINESS;
 
 const OurCompany = () => {
   return (
     <section
       id="our-company"
-      className=" relative py-10 px-8 overflow-hidden bg-white text-center scroll-mt-26 md:scroll-mt-[15vh]"
+      className="relative py-12 md:py-16 px-8 bg-white scroll-mt-20"
     >
-      {/* Title Section */}
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+          {/* Left: Company Info */}
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-darkblue">
+              Our Company
+            </h2>
+            <p className="mt-2 text-rust font-semibold">
+              Building Excellence since 2006
+            </p>
 
-      <h1 className="text-3xl font-bold text-darkblue">Our Company</h1>
+            <p className="mt-6 text-gray-800 leading-relaxed">
+              <strong>LEE Construction Group, Inc.</strong> is a licensed
+              general contractor and construction management firm with its
+              headquarters in Miami, Florida. Established in 2006, we have built
+              a reputation for excellence in commercial and industrial
+              construction, providing high-quality solutions for both private
+              and government sectors.
+            </p>
 
-      <h2 className="text-lg text-black mt-2">
-        Building Excellence since 2006
-      </h2>
+            <Link href="/about" className={`mt-8 ${button.primary}`}>
+              Learn More
+              <span aria-hidden="true" className={buttonArrow}>
+              →
+            </span>
+            </Link>
+          </div>
 
-      {/* Content Section*/}
-      <div className="mt-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-        {/* Left: Company Info */}
-        <div>
-          <p className="text-gray-800 leading-relaxed">
-            <strong>LEE Construction Group, Inc.</strong> is a licensed general
-            contractor and construction management firm with its headquarters in
-            Miami, Florida. Established in 2006, we have built a reputation for
-            excellence in commercial and industrial construction, providing
-            high-quality solutions for both private and government sectors.
-          </p>
+          {/* Right: photo with experience badge */}
+          <div className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={images.historicRestoration}
+                alt="LEE Construction crew working from a lift on the facade of a historic courthouse"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-[62%_center]"
+              />
+            </div>
+            <p className="absolute -bottom-6 left-0 md:-left-6 bg-darkblue text-white px-6 py-5 border-b-2 border-rust">
+              <span className="block text-xs uppercase tracking-[0.2em] text-white/70">
+                Over
+              </span>
+              <span className="block font-title text-5xl md:text-6xl leading-none tracking-wide">
+                {yearsOfExperience}
+              </span>
+              <span className="mt-1 block font-title text-sm uppercase tracking-[0.15em]">
+                years of Experience
+              </span>
+            </p>
+          </div>
         </div>
 
-        {/* Right: Checkmarks */}
-        <div className="space-y-6">
-          <div className="flex items-center space-x-2">
-            <FiCheckCircle className="text-blue text-2xl" />
-
-            <span className="font-medium">Over 19 years of Experience</span>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <FiCheckCircle className="text-blue text-2xl" />
-
-            <span className="font-medium">
-              $50 Million Single Project Bonding Limit
-            </span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FiCheckCircle className="text-blue text-2xl" />
-
-            <span className="font-medium">
-              $100 Million Aggregate Bonding Capacity
-            </span>
-          </div>
-        </div>
       </div>
-
-      {/* Learn More Button*/}
-
-      <motion.a
-        href="/about"
-        className="mt-10 inline-flex shadow-lg items-center text-white bg-blue px-6 py-3 rounded text-md font-bold transition-all"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        Learn More
-        <motion.span
-          className="ml-2"
-          animate={{ x: [0, 5, 0] }}
-          transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-        >
-          →
-        </motion.span>
-      </motion.a>
     </section>
   );
 };

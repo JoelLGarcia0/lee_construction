@@ -1,44 +1,45 @@
-"use client";
-
 import Image from "next/image";
 import { logos } from "../../../public";
-import Marquee from "react-fast-marquee";
 
 const clientLogos = [
-  { src: logos.baptist, width: 140, height: 80 },
-  { src: logos.browardCounty, width: 140, height: 80 },
-  { src: logos.browardHealth, width: 110, height: 65 },
-  { src: logos.clevelandClinic, width: 150, height: 85 },
-  { src: logos.gsa, width: 80, height: 60 },
-  { src: logos.jackson, width: 130, height: 75 },
-  { src: logos.memorial, width: 140, height: 80 },
-  { src: logos.miamiDadeCounty, width: 135, height: 75 },
-  { src: logos.miamiDadeSchools, width: 80, height: 80 },
-  { src: logos.nationalParkServices, width: 80, height: 106 },
+  { src: logos.jackson, name: "Jackson Health System", width: 130, height: 75 },
+  { src: logos.clevelandClinic, name: "Cleveland Clinic", width: 150, height: 85 },
+  { src: logos.baptist, name: "Baptist Health", width: 140, height: 80 },
+  { src: logos.memorial, name: "Memorial Healthcare System", width: 140, height: 80 },
+  { src: logos.browardHealth, name: "Broward Health", width: 110, height: 65 },
+  { src: logos.gsa, name: "U.S. General Services Administration", width: 80, height: 60 },
+  { src: logos.nationalParkServices, name: "National Park Service", width: 80, height: 106 },
+  { src: logos.miamiDadeCounty, name: "Miami-Dade County", width: 135, height: 75 },
+  { src: logos.browardCounty, name: "Broward County", width: 140, height: 80 },
+  { src: logos.miamiDadeSchools, name: "Miami-Dade County Public Schools", width: 80, height: 80 },
 ];
 
 const Clients = () => {
   return (
-    <section className="py-16 px-8 bg-white text-center overflow-hidden">
-      <h1 className="text-3xl font-bold text-darkblue mb-8">Our Clients</h1>
+    <section className="py-12 md:py-16 px-8 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-darkblue">
+          Our Clients
+        </h2>
 
-      {/* Scrolling Logo Carousel */}
-      <Marquee speed={50} gradient={false} pauseOnHover={true}>
-        <div className="flex items-center space-x-20">
-          {clientLogos.map((logo, index) => (
-            <div key={index} className="flex-shrink-0">
+        <ul className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-l border-gray-200">
+          {clientLogos.map((logo) => (
+            <li
+              key={logo.name}
+              className="flex items-center justify-center h-32 p-4 border-r border-b border-gray-200"
+            >
               <Image
                 src={logo.src}
-                alt={`Client ${index + 1}`}
+                alt={logo.name}
+                title={logo.name}
                 width={logo.width}
                 height={logo.height}
-                className="object-contain"
+                className="object-contain max-h-20 w-auto grayscale opacity-70 transition hover:grayscale-0 hover:opacity-100"
               />
-            </div>
+            </li>
           ))}
-          <div></div>
-        </div>
-      </Marquee>
+        </ul>
+      </div>
     </section>
   );
 };

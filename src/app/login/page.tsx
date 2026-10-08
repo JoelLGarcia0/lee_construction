@@ -3,9 +3,10 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
 import LoginForm from "./LoginForm";
+import Title from "@/components/sections/Title";
 
 export const metadata: Metadata = {
-  title: "Admin Login | LEE Construction Group",
+  title: "Admin Login",
   robots: {
     index: false,
     follow: false,
@@ -21,8 +22,11 @@ export default async function LoginPage() {
   }
 
   return (
-    <main className="flex justify-center items-start px-4 pt-24 pb-12 min-h-[70vh] bg-greybg">
-      <LoginForm />
+    <main>
+      <Title title="Admin Login" />
+      <div className="px-8 py-12 md:py-16 bg-greybg">
+        <LoginForm />
+      </div>
     </main>
   );
 }

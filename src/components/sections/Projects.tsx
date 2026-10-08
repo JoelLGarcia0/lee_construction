@@ -1,333 +1,200 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
-import {
-  MdOutlineKeyboardDoubleArrowDown,
-  MdOutlineKeyboardDoubleArrowUp,
-} from "react-icons/md";
+import Lightbox from "@/components/ui/Lightbox";
+import { SECTORS } from "@/lib/sectors";
+import { YEARS_IN_BUSINESS } from "@/lib/company";
+import { button } from "@/lib/styles";
 
-interface ImageData {
+export interface ProjectImage {
   id: string;
   src: string;
-  alt: string;
-  order: number;
   category: string;
 }
 
-const Projects = () => {
-  const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
-  const [images, setImages] = useState<ImageData[]>([]);
-  const router = useRouter();
-  const pathname = usePathname();
+// One large photo plus four smaller ones fills the opening block exactly.
+const FEATURED_COUNT = 5;
 
-  const categories = [
-    {
-      key: "healthcare",
-      title: "Healthcare",
-      pill: "bg-[#e8f1fb] text-[#005bc3] ring-1 ring-[#cfe0f7]",
-      accent: "bg-[#005bc3]",
-      button:
-        "bg-white text-[#005bc3] ring-1 ring-[#cfe0f7] hover:bg-[#e8f1fb]",
-    },
-    {
-      key: "education",
-      title: "Education",
-      pill: "bg-[#B6E0BA] text-[#316938] ring-1 ring-[#cfd6ee]",
-      accent: "bg-[#40AD53]",
-      button:
-        "bg-white text-[#122a71] ring-1 ring-[#cfd6ee] hover:bg-[#e9ecf7]",
-    },
-    {
-      key: "government",
-      title: "Government",
-      pill: "bg-[#DED683] text-[#6B611F] ring-1 ring-[#efcdbf]",
-      accent: "bg-[#C2B234]",
-      button:
-        "bg-white text-[#b7410e] ring-1 ring-[#efcdbf] hover:bg-[#f6e8e2]",
-    },
-    {
-      key: "private",
-      title: "Private",
-      pill: "bg-[#f6e8e2] text-[#b7410e] ring-1 ring-[#d9deeb]",
-      accent: "bg-[#b7410e]",
-      button:
-        "bg-white text-[#122a71] ring-1 ring-[#d9deeb] hover:bg-[#eff1f6]",
-    },
-  ];
+// Grid spans for the opening block, so it stays a full rectangle even when a
+// sector has fewer than five photos. Photos after the block are plain tiles.
+function tileSpan(index: number, total: number) {
+  if (index >= FEATURED_COUNT) return "";
+  // Phones use 2 columns, desktop uses 4. Spans are chosen so both stay even:
+  // e.g. 3 photos = one large + two side by side on phones, and 4 photos =
+  // a plain 2×2 grid on phones.
+  if (total === 1) return "col-span-2 row-span-2 md:col-span-4";
+  if (total === 2) return "col-span-2 row-span-2";
+  if (total === 4) {
+    if (index === 0) return "md:col-span-2 md:row-span-2";
+    if (index === 3) return "md:col-span-2";
+    return "";
+  }
+  // 3 photos: three equal tiles on desktop (that grid uses 3 columns).
+  if (total === 3) {
+    return index === 0
+      ? "col-span-2 row-span-2 md:col-span-1"
+      : "md:row-span-2";
+  }
+  if (index === 0) return "col-span-2 row-span-2";
+  return "";
+}
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await fetch("/api/images");
-        const data = await res.json();
-        setImages(data.images || []);
-      } catch (err) {
-        console.error("Failed to load project images", err);
-      }
-    };
+const Projects = ({ images }: { images: ProjectImage[] }) => {
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [viewer, setViewer] = useState<{
+    sector: string;
+    index: number;
+  } | null>(null);
 
-    fetchImages();
-  }, []);
+  const sectors = SECTORS.map((sector) => ({
+    ...sector,
+    images: images
+      .filter((img) => img.category === sector.key)
+      .map((img, i) => ({
+        ...img,
+        alt: `${sector.title} construction project by LEE Construction, photo ${i + 1}`,
+      })),
+  })).filter((sector) => sector.images.length > 0);
 
-  // Handle hash navigation after images are loaded and component is rendered
-  useEffect(() => {
-    const handleHashNavigation = () => {
-      const hash = window.location.hash;
-      if (hash && images.length > 0) {
-        setTimeout(() => {
-          const element = document.querySelector(hash);
-          if (element) {
-            const offset = 120; // Adjust based on navbar height
-            const elementPosition =
-              element.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: elementPosition - offset,
-              behavior: "smooth",
-            });
-          }
-        }, 300); // Wait for content to render
-      }
-    };
-
-    // Run immediately if hash exists
-    handleHashNavigation();
-
-    // Also listen for hash changes
-    window.addEventListener("hashchange", handleHashNavigation);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashNavigation);
-    };
-  }, [images.length]); // Re-run when images are loaded
-
-  const toggleCategory = (category: string) => {
-    setExpanded((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
-  };
-
-  const getImagesByCategory = (category: string) => {
-    return images
-      .filter((img) => img.category === category)
-      .sort((a, b) => a.order - b.order);
-  };
-
-  const getVisibleImages = (category: string) => {
-    const categoryImages = getImagesByCategory(category);
-    return expanded[category] ? categoryImages : categoryImages.slice(0, 3);
-  };
-
-  const handleContactClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const contactSection = document.getElementById("contact");
-
-    if (pathname === "/") {
-      if (contactSection) {
-        const offset = 120; // Adjust based on navbar height
-        const elementPosition =
-          contactSection.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
-      }
-    } else {
-      router.push("/#contact"); // Navigate to Home and scroll
-      setTimeout(() => {
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-          const offset = 105; // Adjust based on navbar height
-          const elementPosition =
-            contactSection.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: elementPosition - offset,
-            behavior: "smooth",
-          });
-        }
-      }, 500); // Delay scrolling after navigation
-    }
-  };
+  const viewerSector = viewer && sectors.find((s) => s.key === viewer.sector);
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-10">
-        <div className="absolute inset-0"></div>
-        <div className="relative max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-6">
+    <div>
+      {/* Intro */}
+      <section className="px-8 pt-12 md:pt-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-darkblue">
             Our <span className="text-rust">Experience</span> At A Glance
-          </h1>
-          <p className="text-lg max-w-4xl mx-auto leading-relaxed">
-            With 18 years of experience and a promising future ahead, LEE
-            Construction Group, Inc. continues to serve major clients such as
-            Jackson Health Systems, the National Park Service, GSA, and the U.S.
-            Navy. Backed by a skilled team, we have the manpower and capability
-            to perform work throughout Florida and beyond...
+          </h2>
+          <p className="mt-4 max-w-4xl text-gray-800 leading-relaxed">
+            With {YEARS_IN_BUSINESS} years of experience and a promising future
+            ahead, LEE Construction Group, Inc. continues to serve major clients
+            such as Jackson Health Systems, the National Park Service, GSA, and
+            the U.S. Navy. Backed by a skilled team, we have the manpower and
+            capability to perform work throughout Florida and beyond...
           </p>
         </div>
       </section>
 
-      {/* Categories Navigation */}
-      <section className="bg-white py-8 shadow-sm top-0 z-40">
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => {
-              const categoryImages = getImagesByCategory(category.key);
-              if (categoryImages.length === 0) return null;
-
-              return (
-                <a
-                  key={category.key}
-                  href={`#${category.key}`}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-sm ${category.pill}`}
-                >
-                  <div className="w-3 h-3 rounded-full bg-white" />
-                  {category.title}
-                  <span className="text-sm opacity-80">
-                    ({categoryImages.length})
-                  </span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="mt-10">
-        <div className="max-w-7xl mx-auto px-8">
-          {categories.map((category) => {
-            const categoryImages = getImagesByCategory(category.key);
-            const visibleImages = getVisibleImages(category.key);
-
-            if (categoryImages.length === 0) return null;
-
-            return (
-              <div
-                key={category.key}
-                id={category.key}
-                className="mb-20 scroll-mt-36"
+      {/* Sector jump bar */}
+      <nav
+        aria-label="Project sectors"
+        className="sticky top-20 z-40 mt-8 bg-white/95 backdrop-blur border-y border-gray-200 px-8"
+      >
+        <ul className="max-w-6xl mx-auto flex gap-6 md:gap-10 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {sectors.map((sector) => (
+            <li key={sector.key} className="shrink-0">
+              <a
+                href={`#${sector.key}`}
+                className="inline-flex items-baseline gap-2 py-4 font-title uppercase tracking-wide text-darkblue border-b-2 border-transparent hover:border-blue hover:text-blue transition-colors"
               >
-                {/* Category Header */}
-                <div className="text-center mb-12">
-                  <div className="flex items-center justify-center gap-4 mb-4">
-                    <div
-                      className={`w-8 h-1 rounded-full ${category.accent}`}
-                    ></div>
-                    <h1 className="text-3xl font-bold text-darkblue">
-                      {category.title} Projects
-                    </h1>
-                    <div
-                      className={`w-8 h-1 rounded-full ${category.accent}`}
-                    ></div>
-                  </div>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    {category.key === "healthcare" &&
-                      "State-of-the-art healthcare facilities designed for patient care and operational efficiency."}
-                    {category.key === "education" &&
-                      "Modern educational institutions that foster learning and community growth."}
-                    {category.key === "government" &&
-                      "Public infrastructure projects serving communities and government operations."}
-                    {category.key === "private" &&
-                      "Custom commercial and private construction solutions tailored to client needs."}
+                {sector.title}
+                <span className="font-body text-sm text-gray-500 tracking-normal">
+                  {sector.images.length}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Galleries */}
+      <div className="px-8 py-12 md:py-16 space-y-16 md:space-y-20">
+        {images.length === 0 && (
+          <p className="max-w-6xl mx-auto text-gray-600">
+            Project photos are on their way. Check back soon.
+          </p>
+        )}
+
+        {sectors.map((sector) => {
+          const isExpanded = expanded[sector.key];
+          const featured = sector.images.slice(0, FEATURED_COUNT);
+          const rest = sector.images.slice(FEATURED_COUNT);
+
+          const tile = (img: (typeof sector.images)[number], index: number) => (
+            <button
+              key={img.id}
+              type="button"
+              onClick={() => setViewer({ sector: sector.key, index })}
+              aria-label={`View ${sector.title} photo ${index + 1} of ${sector.images.length}`}
+              className={`group relative overflow-hidden bg-greybg focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue ${tileSpan(
+                index,
+                sector.images.length
+              )}`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes={
+                  tileSpan(index, sector.images.length).includes("col-span-2")
+                    ? "(max-width: 768px) 100vw, 50vw"
+                    : "(max-width: 768px) 50vw, 25vw"
+                }
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </button>
+          );
+
+          return (
+            <section
+              key={sector.key}
+              id={sector.key}
+              className="max-w-6xl mx-auto scroll-mt-40"
+            >
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-2 md:gap-8 mb-6">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold text-darkblue">
+                    {sector.title} Projects
+                  </h2>
+                  <p className="mt-2 max-w-2xl text-gray-700">
+                    {sector.description}
                   </p>
                 </div>
-
-                {/* Images Grid */}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {visibleImages.map((img, index) => (
-                    <div
-                      key={`${category.key}-${img.id || img.src}-${
-                        img.order ?? index
-                      }`}
-                      className="relative overflow-hidden rounded-2xl shadow-lg bg-white"
-                    >
-                      <div className="relative aspect-[4/3] bg-[#f3f3f3]">
-                        <Image
-                          src={img.src}
-                          alt={img.alt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          // Eager-load the first row to reduce pop-in:
-                          priority={index < 3 && !expanded[category.key]}
-                          loading={
-                            index < 3 && !expanded[category.key]
-                              ? "eager"
-                              : "lazy"
-                          }
-                        />
-                      </div>
-
-                      <div
-                        className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold text-white ${category.accent} shadow-lg`}
-                      >
-                        {category.title}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Expand/Collapse Button */}
-                {categoryImages.length > 3 && (
-                  <div className="mt-12 flex justify-center">
-                    <button
-                      onClick={() => toggleCategory(category.key)}
-                      className={`group flex items-center gap-3 px-8 py-4 rounded-md  font-semibold text-white transition-all duration-300 hover:scale-105 shadow-lg ${category.accent}`}
-                    >
-                      {expanded[category.key] ? (
-                        <>
-                          <span>Show Less</span>
-                          <MdOutlineKeyboardDoubleArrowUp
-                            size={20}
-                            className="group-hover:translate-y-1 transition-transform"
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <span>View All {categoryImages.length} Images</span>
-                          <MdOutlineKeyboardDoubleArrowDown
-                            size={20}
-                            className="group-hover:translate-y-1 transition-transform"
-                          />
-                        </>
-                      )}
-                    </button>
-                  </div>
-                )}
               </div>
-            );
-          })}
-        </div>
-      </section>
 
-      {/* Call to Action */}
-      <section className="bg-darkblue text-white py-12">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Start Your Project?
-          </h1>
-          <p className="text-xl text-white/90 mb-8">
-            Let&apos;s discuss how we can bring your vision to life with our
-            expertise and dedication.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={handleContactClick}
-              className="inline-flex items-center justify-center px-8 py-4 bg-rust text-white font-semibold rounded-lg hover:bg-rust/90 transition-colors duration-300 shadow-lg"
-            >
-              Get a Quote
-            </button>
-            <a
-              href="tel:+13052167558"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-darkblue transition-colors duration-300"
-            >
-              Call (305) 216-7558
-            </a>
-          </div>
-        </div>
-      </section>
+              <div
+                className={`grid grid-cols-2 ${
+                  sector.images.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"
+                } auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[200px] gap-2 md:gap-3`}
+              >
+                {featured.map((img, i) => tile(img, i))}
+                {isExpanded &&
+                  rest.map((img, i) => tile(img, i + FEATURED_COUNT))}
+              </div>
+
+              {rest.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setExpanded((prev) => ({
+                      ...prev,
+                      [sector.key]: !prev[sector.key],
+                    }))
+                  }
+                  aria-expanded={!!isExpanded}
+                  className={`mt-6 ${button.outlineDark}`}
+                >
+                  {isExpanded
+                    ? "Show Less"
+                    : `View All ${sector.images.length} Images`}
+                </button>
+              )}
+            </section>
+          );
+        })}
+      </div>
+
+      {viewer && viewerSector && (
+        <Lightbox
+          images={viewerSector.images}
+          index={viewer.index}
+          label={viewerSector.title}
+          onIndexChange={(index) => setViewer({ ...viewer, index })}
+          onClose={() => setViewer(null)}
+        />
+      )}
     </div>
   );
 };

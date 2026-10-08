@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
-
-type ProjectImageInput = {
-  src: string;
-  alt: string;
-  category: string;
-  publicId?: string;
-};
 
 export async function GET() {
   try {
@@ -26,19 +20,16 @@ export async function GET() {
   }
 }
 
+// Saves the display order. Only each photo's `order` changes, all in one
+// transaction, so IDs and upload dates are kept and a failure changes nothing.
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const images: ProjectImageInput[] = body.images;
+    const images: { id: string }[] = body.images;
 
     if (
       !Array.isArray(images) ||
-      images.some(
-        (img) =>
-          typeof img.src !== "string" ||
-          typeof img.alt !== "string" ||
-          typeof img.category !== "string"
-      )
+      images.some((img) => typeof img?.id !== "string")
     ) {
       return NextResponse.json(
         { error: "Invalid image data" },
@@ -46,28 +37,21 @@ export async function PUT(req: Request) {
       );
     }
 
-    await prisma.$connect();
-    await prisma.projectImage.deleteMany();
+    await prisma.$transaction(
+      images.map((image, index) =>
+        prisma.projectImage.update({
+          where: { id: image.id },
+          data: { order: index },
+        })
+      )
+    );
 
-    if (images.length > 0) {
-      await prisma.projectImage.createMany({
-        data: images.map((image, index) => ({
-          src: image.src,
-          alt: image.alt,
-          category: image.category,
-          publicId: image.publicId ?? null,
-          order: index,
-        })),
-      });
-    }
-
-    await prisma.$disconnect();
+    revalidatePath("/projects");
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Failed to update images:", err);
-    await prisma.$disconnect();
+    console.error("Failed to update image order:", err);
     return NextResponse.json(
-      { error: "Failed to update images" },
+      { error: "Failed to update image order" },
       { status: 500 }
     );
   }

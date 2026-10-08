@@ -3,7 +3,7 @@ import Commitment from "@/components/sections/Commitment";
 import ContactUs from "@/components/sections/ContactUs";
 import Hero from "@/components/sections/Hero";
 import OurCompany from "@/components/sections/OurCompany";
-import OurOffice from "@/components/sections/OurOffice";
+import Qualifications from "@/components/sections/Qualifications";
 import WhatWeDo from "@/components/sections/WhatWeDo";
 
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
       <OurCompany />
       <WhatWeDo />
       <Commitment />
+      <Qualifications />
       <Clients />
-      <OurOffice />
       <ContactUs />
     </main>
   );

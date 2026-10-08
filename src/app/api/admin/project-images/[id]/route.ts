@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
 import cloudinary from "@/lib/cloudinary";
 
@@ -48,6 +49,7 @@ export async function DELETE(
     }
 
     await prisma.$disconnect();
+    revalidatePath("/projects");
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Delete failed:", err);

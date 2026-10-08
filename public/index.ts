@@ -1,43 +1,25 @@
 export const icons = {
   leelogoIco: "/icons/leelogo.ico",
-  leelogoPng: "/icons/leelogo.png",
-  leelogo2Png: "/icons/leelogo2.png",
+  // Vector logo from the original Illustrator file (LOGO-LEE.PDF).
+  leeLogo: "/icons/lee-logo.svg", // without the tagline
+  leeLogoFull: "/icons/lee-logo-full.svg", // with "Construction Managers & Contractors"
   ruler: "/icons/ruler.svg",
   hardhat: "/icons/hardhat.svg",
   screwdrivers: "/icons/screwdrivers.svg",
-  line1: "/icons/line1.svg",
-  line2: "/icons/line2.svg",
 };
 
 export const images = {
-  aboutTitlePic: "/images/abouttitlepic.jpeg",
-  blueprintBg: "/images/blueprintbg.jpeg",
-  careerPic: "/images/careerpic.jpg",
-  designBuildBg: "/images/designbuildbg.png",
-  gcPic: "/images/gcpic.webp",
-  hero: "/images/HeroResize.png",
+  hero: "/images/hero-crane.jpg",
+  heroMobile: "/images/hero-crane-mobile.jpg",
   plansBg: "/images/plansbg.webp",
   preConstructionBg: "/images/preconstructionbg.jpg",
-  projectsTitleBg: "/images/projectstitlebg.webp",
-  servicePhoto: "/images/servicephoto.jpeg",
-  structural: "/images/structural.webp",
-  teamTitleBg: "/images/teamtitlebg.jpeg",
+  aboutStory: "/images/about-story.jpg",
+  historicRestoration: "/images/historic-restoration.jpg",
+  careersTeam: "/images/careers-team.jpg",
   whatWeDoBg: "/images/whatwedobg.jpeg",
-  workplace: "/images/workplace.jpg",
-  project1: "/images/SouthMiamischool.jpg",
-  project2: "/images/JacksonMemorial.jpg",
-  project3: "/images/SavannahCourthouse2.jpg",
-  chart1: "/images/chart1.png",
   baptist: "/images/baptist.jpg",
   ftschool: "/images/FTschool.jpg",
   county: "/images/county.jpg",
-  miamiDadeSchool: "/images/miamidadeschool.jpeg",
-  beachCityHall: "/images/beachcityhall.jpeg",
-  hospitalEntrance: "/images/hospitalenterance.jpeg",
-  insideHospital: "/images/insidehospital.jpeg",
-  memorial: "/images/MPCMiramar.jpeg",
-  dashHighSchool: "/images/dashimage.jpg",
-  private: "/images/privatetab.jpg",
   private2: "/images/privatetab2.jpg",
 };
 export const logos = {

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import cloudinary from "@/lib/cloudinary";
 import prisma from "@/lib/db";
 import { CATEGORIES, UPLOAD_FOLDER } from "@/lib/uploads";
@@ -57,6 +58,7 @@ export async function POST(req: Request) {
     });
 
     await prisma.$disconnect();
+    revalidatePath("/projects");
     return NextResponse.json(image);
   } catch (err) {
     console.error("Saving upload failed:", err);

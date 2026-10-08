@@ -3,8 +3,8 @@ import { Lato, Oswald } from "next/font/google";
 import "../styles/globals.css";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
-import Head from "next/head";
 import { Toaster } from "sonner";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -19,7 +19,11 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "LEE Construction Group | Commercial Contractors",
+  title: {
+    default: "LEE Construction Group | Commercial Contractors",
+    template: "%s | LEE Construction Group",
+  },
+  formatDetection: { telephone: false },
   description:
     "Experienced commercial contractors specializing in healthcare, education, federal, and municipal projects.",
   icons: {
@@ -68,14 +72,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <meta name="format-detection" content="telephone=no" />
-      </Head>
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${lato.variable} ${oswald.variable} antialiased`}>
         <NavBar />
         {children}
         <Toaster position="bottom-right" />
+        <ScrollReveal />
         <Footer />
       </body>
     </html>
