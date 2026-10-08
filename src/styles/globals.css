@@ -160,7 +160,7 @@
   /* Opacity only: a transform would shift sections while the browser
      calculates where a #link should land, leaving headings under the navbar. */
   .reveal-ready main section:not([data-no-reveal]) {
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.8s ease-out;
   }
   .reveal-ready main section:not([data-no-reveal]):not(.is-visible) {
     opacity: 0;

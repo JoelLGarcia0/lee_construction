@@ -40,9 +40,10 @@ const ScrollReveal = () => {
           }
         }
       },
-      // Reveal as soon as any part of a section is on screen, so content
-      // peeking in below the fold never shows up as a blank band.
-      { rootMargin: "0px", threshold: 0 }
+      // Start the fade once a section is ~20% up the screen, so its content
+      // (not just its top padding) is what visibly fades in. Sections already
+      // on screen at load are shown immediately above, so there's no blank band.
+      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
     );
 
     const observeAll = () =>
