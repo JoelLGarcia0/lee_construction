@@ -52,14 +52,14 @@ const OurCompany = () => {
                 className="object-cover object-[62%_center]"
               />
             </div>
-            <p className="absolute -bottom-6 left-0 md:-left-6 bg-darkblue text-white px-6 py-5 border-b-2 border-rust">
-              <span className="block text-xs uppercase tracking-[0.2em] text-white/70">
+            <p className="absolute -bottom-4 left-3 md:-bottom-6 md:-left-6 bg-darkblue text-white px-3 py-2 md:px-6 md:py-5 border-b-2 border-rust">
+              <span className="block text-[9px] md:text-xs uppercase tracking-[0.2em] text-white/70">
                 Over
               </span>
-              <span className="block font-title text-5xl md:text-6xl leading-none tracking-wide">
+              <span className="block font-title text-3xl md:text-6xl leading-none tracking-wide">
                 {yearsOfExperience}
               </span>
-              <span className="mt-1 block font-title text-sm uppercase tracking-[0.15em]">
+              <span className="mt-0.5 md:mt-1 block font-title text-[10px] md:text-sm uppercase tracking-[0.15em]">
                 years of Experience
               </span>
             </p>

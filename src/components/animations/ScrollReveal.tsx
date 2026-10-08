@@ -16,8 +16,20 @@ const ScrollReveal = () => {
     const skip =
       pathname.startsWith("/admin") ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.documentElement.classList.toggle("reveal-ready", !skip);
-    if (skip) return;
+    if (skip) {
+      document.documentElement.classList.remove("reveal-ready");
+      return;
+    }
+
+    // Anything already on (or above) the screen is shown immediately, before
+    // the hiding style is switched on. Otherwise those sections would render,
+    // vanish for a moment, then fade back in.
+    document.querySelectorAll<HTMLElement>(SELECTOR).forEach((section) => {
+      if (section.getBoundingClientRect().top < window.innerHeight) {
+        section.classList.add("is-visible");
+      }
+    });
+    document.documentElement.classList.add("reveal-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,7 +40,9 @@ const ScrollReveal = () => {
           }
         }
       },
-      { rootMargin: "0px 0px -60px 0px", threshold: 0.05 }
+      // Reveal as soon as any part of a section is on screen, so content
+      // peeking in below the fold never shows up as a blank band.
+      { rootMargin: "0px", threshold: 0 }
     );
 
     const observeAll = () =>
